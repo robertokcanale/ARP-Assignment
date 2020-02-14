@@ -3,15 +3,15 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <math.h>
 #include <signal.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <time.h>
-
+#include <sys/select.h>
 #include "functions.h"
 
-SIZE = 100;
 
 int main(int argc, char *argv[])
 {
@@ -26,17 +26,17 @@ int main(int argc, char *argv[])
   token_received  = 0;
   token_sent = 0;
 
-  logFile("L process: starting execution.\n");
+  printf("L process: starting execution.\n");
 
   sleep(2);
 
   //process L reads data from process G from pipe
-  logFile("L process: Reading data on pipe3 from P.\n");
+  printf("L process: Reading data on pipe3 from P.\n");
 
-  //read  3.1 for char
+  //read  pipe3
   close(atoi(argv[6]));
 
-  read(atoi(argv[5]), message, sizeof(message));  //reading from pipe 3.1
+  read(atoi(argv[5]), &message, sizeof(message));  //reading from pipe 3.1
 
   close(atoi(argv[5]));
 

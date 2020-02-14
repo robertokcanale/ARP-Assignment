@@ -3,12 +3,15 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <math.h>
 #include <signal.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <time.h>
-
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
 #include "functions.h"
 
 //here is my Launcher function. We tailor it to our needs:
@@ -17,10 +20,31 @@
 //-SOCKET from P to G+1
 //-SIGNALS to S
 
-SIZE = 100;
+// TO DO
+// SOCKETS
+// REVIEW G
+// CHECK THE MSG SENT FROM P->L
+// TEST IT MF
+
 
 int main()
 {
+    //reading data from the config file, honestly too lazy to make a function for it, DONT CHANGE CONFIGURATION FILE.
+    FILE *config_file;
+    config_file = fopen("configuration_file.txt", "r");
+
+    char garbage[20], my_machine[20], previous_machine[20], next_machine[20], my_portnumber[20], next_portnumber[20];
+
+    //ad hoc file reading for my function
+    fscanf(config_file, "%20s %20s",garbage, my_machine[20] );
+    fscanf(config_file, "%20s %20s",garbage, previous_machine[20]);
+    fscanf(config_file, "%20s %20s",garbage, next_machine[20]);
+    fscanf(config_file, "%20s %20s",garbage, my_portnumber[20]);
+    fscanf(config_file, "%20s %20s",garbage, next_portnumber[20]);
+    fscanf(config_file, "%20s %d", &R_Frequency);
+
+
+
     //Initializing the processes, their return status and the required Pipes
     pid_t processP;
     pid_t processL;
@@ -55,7 +79,7 @@ int main()
 
 
     //arrays containing data to pass to the exec
-    char *arg[8];
+    char *arg[13];
 
     char r_arg1[5]; //read pipe1
     char w_arg1[5]; //write pipe1
@@ -81,8 +105,12 @@ int main()
     arg[4] = w_arg2; //write, pipe2
     arg[5] = r_arg3; //read, pipe3
     arg[6] = w_arg3; //write, pipe3
-
-    arg[7] = NULL;
+    arg[7] = my_machine; //my IP
+    arg[8] = previous_machine; //previous IP
+    arg[9] = next_machine; //next IP
+    arg[10] = my_portnumber; //my receivng port
+    arg[11] = next_portnumber; //my sending port
+    arg[12] = NULL; //my IP
 
     //starting from P
     processP = fork();//Creates child process
@@ -99,12 +127,12 @@ int main()
         fflush(stdout);
         char *nameP; //executable file name
         nameP = (char *)"./P";
-        arg[0] = name1;
-        execvp(name1, arg); //Executing P
+        arg[0] = nameP;
+        execvp(nameP, arg); //Executing P
     }
     else
     {
-        sleep(1);
+
         processL = fork();
 
         if (processL < 0)
@@ -116,8 +144,8 @@ int main()
         {
             printf("\nLauncher: process L");
             fflush(stdout);
-            char *name2; //executable file name
-            name2 = (char *)"./L";
+            char *nameL; //executable file name
+            nameL = (char *)"./L";
             arg[0] = nameL; //add the process name to the parameters
             execvp(nameL, arg); //Executing L
         }
@@ -134,8 +162,8 @@ int main()
             {
                 printf("\nLauncher: process S");
                 fflush(stdout);
-                char *name3; //executable file name
-                name3 = (char *)"./S";
+                char *nameS; //executable file name
+                nameS = (char *)"./S";
                 arg[0] = nameS;
                 execvp(nameS, arg); //Executing S
             }
@@ -153,14 +181,16 @@ int main()
                     printf("\nLauncher: process G");
                     fflush(stdout);
                     char *nameG; //executable file name
-                    name4 = (char *)"./G";
+                    nameG = (char *)"./G";
                     arg[0] = nameG;
                     execvp(nameG, arg); //Executing M
                 }
             }
 
         }
-        waitpid(processP, &childReturnStatusP, 0); //Waits for all the process to terminate
+        //Waits for all the process to terminate and verifis it
+
+        waitpid(processP, &childReturnStatusP, 0);
         waitpid(processL, &childReturnStatusL, 0);
         waitpid(processS, &childReturnStatusS, 0);
         waitpid(processG, &childReturnStatusG, 0);
@@ -191,7 +221,6 @@ int main()
         {
             printf("\nThe childS process terminated with an error\n");
         }
-
 
         if (childReturnStatusG == 0) //verify child4 terminated without error
         {

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <math.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <signal.h>
@@ -8,5 +9,5 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <time.h>
-
+#include <sys/select.h>
 #include "functions.h"
