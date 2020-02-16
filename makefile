@@ -1,17 +1,18 @@
+
 default: make1
 
 make1:
-        g++ Launcer.c -o Launcher -lm
-      #  g++ launcherReceiver.c -o launcherReceiver -lm //to be defined yet G+1, G-1
-        g++ P.c -o P -lm
-        g++ S.c -o S -lm
-        g++ L.c -lpthread -o L -lm
-
+	g++ Launcher.c -o Launcher -lm
+  g++ P.c -o P -lm
+  g++ S.c -o S -lm
+  g++ L.c -o L -lm
+	g++ G.c -o G -lm
+	g++ G_plus_one_socket_test.c -o G_plus_one_socket_test -lm
 
 clean:
-        rm -f Launcher
-        #rm -f launcherReceiver
-		    rm -f P
-        rm -f S
-        rm -f L
-        #rm -f G-1
+  rm -f Launcher
+	rm -f P
+  rm -f S
+  rm -f L
+	rm -f G
+	rm -f G_plus_one_socket_tests

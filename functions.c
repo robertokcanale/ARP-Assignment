@@ -9,7 +9,7 @@
 
 
 //writes a string on the logfile, and takes a timestamp of it, along with the received token
-void Write_Log_Received(const char string[5], float received_token)
+void Write_Log_Received( float received_token)
 {
     FILE * f;
     time_t t = time(NULL);
@@ -23,7 +23,7 @@ void Write_Log_Received(const char string[5], float received_token)
         exit(0);
     }
 
-    fprintf(f, "\n<%s> <From %s:> <%f>", asctime(tm), string, received_token );
+    fprintf(f, "\n<%s> <Received:> <%f>", asctime(tm), received_token );
     fclose(f);
 }
 
@@ -52,7 +52,13 @@ void Write_Log(char string[50])
     time_t t = time(NULL);
     struct tm * tm = localtime(&t);
 
-    f = fopen("Ass4.log", "a+");
+    f = fopen("Log_File.log", "a+");
+
+    if (f == NULL)
+    {
+        printf("Cannot open file \n");
+        exit(0);
+    }
     fprintf(f, "\n[%s]%s", asctime(tm), string );
     fclose(f);
 }
