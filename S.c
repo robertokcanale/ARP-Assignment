@@ -11,17 +11,20 @@
 #include <fcntl.h>
 #include <time.h>
 #include <sys/select.h>
-#include "functions.h"
+
+#define SIZE 256
 
 void Print_Log();
 void Write_Log(char string[50]);
+
+
 
 int main(int argc, char *argv[]){
 
 printf("S process: starting execution.\n");
 
 int selection = 0;
-int datum;
+char Signal_select[SIZE];
 
 Write_Log((char*)"S process: waiting for the user to Select input\n");
 printf("\nThere are 3 available inputs.\n");
@@ -30,40 +33,38 @@ printf("\nPlease select 1, 2 or 3:\n");
 while(1)
     {
 
-
         scanf("%d", &selection);//take the input
 
 
         if(selection == 1){//Start Receiving Tokens
 
-            datum = 1;
+            strcpy(Signal_select, "1");
             //write on  pipe1
             close(atoi(argv[1]));
 
-            write(atoi(argv[2]), &datum, sizeof(datum));
+            write(atoi(argv[2]), &Signal_select, sizeof(Signal_select));
 
             close(atoi(argv[2]));
 
-            //printf("\nStart, datum = %d\n", datum);
+            printf("\nStart, Signal_select = %s\n", Signal_select);
 
             Write_Log((char*)"Start Receiving and Sending Tokens.\n");
 
         } else if(selection == 2 ){ //Stop Receiving Tokens
 
-            datum = 0;
+            strcpy(Signal_select, "0");
             //write on  pipe1
             close(atoi(argv[1]));
 
-            write(atoi(argv[2]), &datum, sizeof(datum));
+            write(atoi(argv[2]), &Signal_select, sizeof(Signal_select));
 
             close(atoi(argv[2]));
 
-            //printf("\nStop, datum = %d\n", datum);
+            printf("\nStop, Signal_select = %s\n", Signal_select);
 
             Write_Log((char*)"Stop Receiving Tokens.\n");
 
         } else if( selection == 3 ){ //Dump log File
-            //printf("\nPrintLog\n");
 
             Write_Log((char*)"Print Log.\n");
             Print_Log(); // Prints out the Log File
@@ -91,7 +92,7 @@ void Write_Log(char string[50])
         printf("Cannot open file\n");
         exit(0);
     }
-    fprintf(f, "\n<%s> %s\n", asctime(tm), string );
+    fprintf(f, "\nS: <%s> %s\n", asctime(tm), string );
     fclose(f);
 }
 

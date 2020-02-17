@@ -11,7 +11,8 @@
 #include <fcntl.h>
 #include <time.h>
 #include <sys/select.h>
-#include "functions.h"
+
+#define SIZE 256
 
 void Write_Log_Received(float received_token);
 
@@ -23,16 +24,14 @@ int main(int argc, char *argv[])
 
   printf("L process: starting execution.\n");
 
-  struct message_L message;
-  char from[5];
   float token_received  = 0;  //array to store received token
   float token_sent = 0; //array to store sent token
   token_received  = 0;
   token_sent = 0;
 
 
+   while(1){
 
-  sleep(2);
 
   //read  pipe3.1
   close(atoi(argv[6]));
@@ -41,10 +40,14 @@ int main(int argc, char *argv[])
 
   close(atoi(argv[5]));
 
+  //printf("L: Token Received: %f", token_received);
+
   //read  pipe3.2
   close(atoi(argv[13]));
 
   read(atoi(argv[12]), &token_sent, sizeof(token_sent));  //reading from pipe 3.1
+
+  //printf("L: Token Sent: %f", token_sent);
 
   close(atoi(argv[12]));
 
@@ -52,7 +55,9 @@ int main(int argc, char *argv[])
   Write_Log_Received(token_received);
 
   Write_Log_Sent(token_sent);
+  sleep(5);
 
+    }
 
   return(0);
 }
@@ -72,7 +77,7 @@ void Write_Log_Received(float received_token)
         exit(0);
     }
 
-    fprintf(f, "\n<%s> <Received:> <%f>", asctime(tm), received_token );
+    fprintf(f, "\n<%s> <L: Received:> <%f>", asctime(tm), received_token );
     fclose(f);
 }
 
@@ -91,7 +96,7 @@ void Write_Log_Sent(float sent_token)
         exit(0);
     }
 
-    fprintf(f, "\n<%s> <Token Sent:> <%f>", asctime(tm), sent_token );
+    fprintf(f, "\n<%s> <L: Token Sent:> <%f>", asctime(tm), sent_token );
     fclose(f);
 }
 

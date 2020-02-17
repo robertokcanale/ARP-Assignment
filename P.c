@@ -11,8 +11,9 @@
 #include <fcntl.h>
 #include <netinet/in.h>
 #include <time.h>
-#include "functions.h"
 
+
+#define SIZE 256
 
 float New_Token(float received_token, float time_delay, float RF );
 
@@ -21,21 +22,26 @@ void error(char *msg);
 void Write_Log(char string[50]);
 
 
-
 int main(int argc, char *argv[]){
 
 printf("P process: starting execution.\n");
 
 //variables initialization.general
     fd_set file_descriptor_select;
-    int signal_received, my_select, max_fd;
-    float token_received, token_to_send, DT;  //I initialize R_frequency as a global variable in Lanucher (maybe better in header?
+    int  signal_received_int, my_select, max_fd, res;
+    float token_received_float, token_to_send, DT, R_Frequency;  //I initialize R_frequency as a global variable in Lanucher (maybe better in header?
     int fd1 = atoi(argv[1]); //reads the two  file descriptors of pipe1 and 2
     int fd2 = atoi(argv[3]); //these are for reading pipe1 and pipe2
     time_t t_received, t_sent;
 
-   token_received = 0;
-   token_to_send = 0;
+    //buffers for my select pipes
+    char signal_received[SIZE];
+    char token_received[SIZE];
+
+    R_Frequency = atof(argv[14]); //giving a value to my RF
+
+    token_received_float = 0;
+    token_to_send = 0;
 
 //creating SERVER socket
     //variables initialization.socket
@@ -74,75 +80,60 @@ printf("P process: starting execution.\n");
 
 
     while(1){
-
-
-
     //Stuff needed for the select
     FD_ZERO(&file_descriptor_select); //initialize file_descriptor_select to 0
     FD_SET(fd1, &file_descriptor_select); //Sets the bit for the file descriptor fd1 in the file descriptor set file_descriptor_select
     FD_SET(fd2, &file_descriptor_select); //Sets the bit for the file descriptor fd2 in the file descriptor set file_descriptor_select
 
-    if(fd1 > fd2){
-            max_fd = fd1;
-        } else if(fd2 > fd1) {
-            max_fd = fd2;
-        }
+    max_fd = fd1 >fd2 ? fd1 : fd2;
 
-    //printf("P gets here. max_fd = %d\n", max_fd);
-    my_select = select(max_fd+1, &file_descriptor_select, NULL, NULL, NULL); //3 because REASONS; check select libriary description
+
+    my_select = select(max_fd+1, &file_descriptor_select, NULL, NULL, NULL);
 
     if (my_select == -1) {error((char*)"Error with select()");}
 
-    //printf("Select received = %d", signal_received);
 
-    //check on my select received
-    if(my_select != 0){
-            //if there are two pipes available
-            if(my_select == 2)
-            {
-                //first read PIPE 1
-                close(atoi(argv[0]));
-                read(fd1, &signal_received, sizeof(signal_received));
-                //then read PIPE 2
-                close(atoi(argv[2]));
-                read(fd2, &token_received, sizeof(token_received));
+    if (FD_ISSET(fd1, &file_descriptor_select))
+    {
+        // We can read from fd1
+        res = read(fd1, &signal_received, sizeof(signal_received));
 
-           }//end of my_select = 2;
+        //convert from char buffer to Int
+        sscanf(signal_received, "%d", &signal_received_int);
 
-          //if there is one pipe available
-          if(FD_ISSET(fd1 ,&file_descriptor_select)){       //check if it is pipe 1
-                close(atoi(argv[0]));
-                read(fd1, &signal_received, sizeof(signal_received));
-
-            }
-           if(FD_ISSET(fd2 ,&file_descriptor_select)) {    //check if it is pipe 2
-                close(atoi(argv[2]));
-                read(fd2, &token_received, sizeof(token_received));
-           }
-    }  else {
-        printf("Something wrong with the reading the pipes and select");
+        if (res > 0)
+        {
+            printf("Read %d bytes from Pipe1: %d\n", res, signal_received_int);
+        }
     }
+    if (FD_ISSET(fd2, &file_descriptor_select))
+    {
+        // We can read from fd2
+        res = read(fd2, &token_received, sizeof(token_received));
 
+        //convert from char buffer to float
+        token_received_float = (float)atof(token_received);
+
+        t_received = time(NULL);
+
+        if (res > 0)
+        {
+            printf("Read %d bytes from Pipe2: %f\n", res, token_received_float);
+        }
+      }
+
+    //printf("P gets here. signal_receive_int = %d, token_received: %f\n", signal_received_int,token_received_float);
 
     //now perform operations according to the received signal
-    if(signal_received == 1){ //Start Receiving Tokens and sending them!
+    if(signal_received_int == 1){ //Start Receiving Tokens and sending them!
 
                 //write on the log
-                Write_Log((char*)"Receved token, seding it.\n");
-                printf("\nReceiving and sending tokens.\n");
-
-                //receive Tokens from G-1 over PIPE
-                close(atoi(argv[4]));
-
-                read(fd2, &token_received, sizeof(token_received));
-
-                t_received = time(NULL);
-
-                close(fd2);
+                Write_Log((char*)"P: Received token, seding it.\n");
+                printf("\nP: Receiving and sending tokens. Token Received: %f.\n", token_received_float);
 
                 //interface here to SEND TOKENS OVER THE SOCKET
 
-                // listen for socket connections (i.e. if any client is connecting
+                // listen for socket connections (i.e. if any client is connecting)
                 listen(sockfd,5);
 
                 // a new connection can arrive from a client, handled here, and checked if it is accepted
@@ -155,7 +146,7 @@ printf("P process: starting execution.\n");
                 //COMPUTING Token to Send
                 t_sent = time(NULL);
                 DT = difftime( t_sent, t_received);
-                token_to_send = New_Token(token_received, DT, R_Frequency); //smt here, it's the result of New_Token() operation
+                token_to_send = New_Token(token_received_float, DT, R_Frequency); //smt here, it's the result of New_Token() operation
 
                 //writing on socket
                 n = write(sockfd, &token_to_send, sizeof(token_to_send));//write on socket
@@ -164,12 +155,13 @@ printf("P process: starting execution.\n");
                         error((char*)"\nERROR writing to socket.");
                     }
 
-            } else if(signal_received == 0){ //Stop receiving tokens and sending them
+            } else if(signal_received_int == 0){ //Stop receiving tokens and sending them
 
-                Write_Log((char*)"Stop receiving and sending tokens.\n");
-                printf("\nStop receiving and sending tokens.\n");
+                Write_Log((char*)"P: Stop receiving and sending tokens.\n");
+                //printf("\nP: Stop receiving and sending tokens.\n");
 
             } else {
+
             printf("\nSomething went really wrong.\n");
                 }
 
@@ -225,7 +217,7 @@ void Write_Log(char string[50])
         printf("Cannot open file\n");
         exit(0);
     }
-    fprintf(f, "\n[%s] %s\n", asctime(tm), string );
+    fprintf(f, "\nP: <%s> %s\n", asctime(tm), string );
     fclose(f);
 }
 

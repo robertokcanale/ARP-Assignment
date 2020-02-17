@@ -26,11 +26,12 @@ void error(char *msg);
 
 int main(int argc, char *argv[])
 {
+    //initializing my tokens
+    char token_received[SIZE];
+    float token_to_send;
+    token_to_send = 0;
 
-//initializing my tokens
-float token_received, token_to_send;
-token_received =0;
-token_to_send = 0;
+    printf("G process: starting execution.\n");
 
 //Creating my CLIENT here
 int sockfd, portno, n;
@@ -65,20 +66,19 @@ char buffer[256];
     }
     //now that the connection is estabilshed, we can keep receivig datafrom the server through the socket!
 
+
+
     while(1){
-    //read from Socket
+        //read from Socket
     n = read(sockfd, &token_received, sizeof(token_received));
     if (n < 0)
     error((char*)"ERROR reading from socket");
     printf("%s\n",buffer);
 
-    //write on PIPE (which pipe? user who receives this should properly configure argv numbers
-
-    token_to_send = token_received;
-
+    //write on pipe
     close(atoi(argv[1]));
 
-    write(atoi(argv[2]), &token_to_send, sizeof(token_to_send));
+    write(atoi(argv[2]), &token_received, sizeof(token_received));
 
     close(atoi(argv[2]));
 

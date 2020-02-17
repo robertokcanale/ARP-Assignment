@@ -14,7 +14,7 @@
 #include <sys/select.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "functions.h"
+
 
 //here is my Launcher function. We tailor it to our needs:
 //-SELECT between G and S from P
@@ -44,8 +44,6 @@ int main()
     fscanf(config_file, "%s", my_portnumber);
     fscanf(config_file, "%s", next_portnumber);
     fscanf(config_file, "%s", RF);
-
-    R_Frequency = atof(RF); //giving a value to my RF
 
  // just a check to see if I received my the data from my configuration file.
  /* printf("Received my_IP: %s", my_machine);
@@ -128,7 +126,8 @@ int main()
     arg[11] = next_portnumber; //my sending port
     arg[12] = r_arg4; //read, pipe3.2
     arg[13] = w_arg4; //read, pipe3.2
-    arg[14] = NULL; //my IP
+    arg[14] = RF; //the read RF
+    arg[15] = NULL; //my IP
 
     //starting from P
     processP = fork();//Creates child process

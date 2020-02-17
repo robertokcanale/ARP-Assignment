@@ -1,212 +1,72 @@
 
-<Sun Feb 16 17:22:39 2020
+S: <Mon Feb 17 19:01:57 2020
 > S process: waiting for the user to Select input
 
 
-<Sun Feb 16 17:23:24 2020
-> S process: waiting for the user to Select input
+P: <Mon Feb 17 19:01:57 2020
+> P: Stop receiving and sending tokens.
 
 
-<Sun Feb 16 17:23:42 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 17:24:32 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 17:25:48 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 17:26:11 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 17:26:34 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 18:48:40 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 18:48:42 2020
-> Start Receiving and Sending Tokens.
-
-
-<Sun Feb 16 18:48:48 2020
-> Stop Receiving Tokens.
-
-
-<Sun Feb 16 18:48:53 2020
-> Stop Receiving Tokens.
-
-
-<Sun Feb 16 18:49:09 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 18:49:30 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 18:58:09 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 18:58:11 2020
-> <Received:> <0.000000>
-<Sun Feb 16 18:58:11 2020
+<Mon Feb 17 19:01:57 2020
+> <Received:> <0.000001>
+<Mon Feb 17 19:01:57 2020
 > <Token Sent:> <0.000000>
-<Sun Feb 16 18:59:59 2020
-> S process: waiting for the user to Select input
+S: <Mon Feb 17 19:01:58 2020
+> Start Receiving and Sending Tokens.
 
 
-<Sun Feb 16 19:01:45 2020
-> S process: waiting for the user to Select input
+P: <Mon Feb 17 19:01:58 2020
+> P: Received token, seding it.
 
 
-<Sun Feb 16 19:01:47 2020
-> <Received:> <0.000000>
-<Sun Feb 16 19:01:47 2020
+<Mon Feb 17 19:02:02 2020
+> <Received:> <0.000001>
+<Mon Feb 17 19:02:02 2020
 > <Token Sent:> <0.000000>
-<Sun Feb 16 19:01:50 2020
-> S process: User inserted invalid choice.
+S: <Mon Feb 17 19:02:03 2020
+> Stop Receiving Tokens.
 
 
-<Sun Feb 16 19:21:37 2020
+<Mon Feb 17 19:02:07 2020
+> <Received:> <0.000001>
+<Mon Feb 17 19:02:07 2020
+> <Token Sent:> <0.000000>
+S: <Mon Feb 17 19:02:08 2020
+> Start Receiving and Sending Tokens.
+
+
+P: <Mon Feb 17 19:04:37 2020
+> P: Stop receiving and sending tokens.
+
+
+<Mon Feb 17 19:04:37 2020
+> <Received:> <0.000001>
+<Mon Feb 17 19:04:37 2020
+> <Token Sent:> <0.000000>
+S: <Mon Feb 17 19:04:37 2020
 > S process: waiting for the user to Select input
 
 
-[Sun Feb 16 19:21:37 2020
-] Stop receiving and sending tokens.
+P: <Mon Feb 17 19:04:40 2020
+> P: Received token, seding it.
 
 
-<Sun Feb 16 19:21:39 2020
-> <Received:> <0.000000>
-<Sun Feb 16 19:21:39 2020
-> <Token Sent:> <1.000000>
-<Sun Feb 16 19:21:44 2020
+S: <Mon Feb 17 19:04:40 2020
 > Start Receiving and Sending Tokens.
 
 
-[Sun Feb 16 19:21:44 2020
-] Receved token, seding it.
-
-
-<Sun Feb 16 19:21:50 2020
+<Mon Feb 17 19:04:42 2020
+> <Received:> <0.000001>
+<Mon Feb 17 19:04:42 2020
+> <Token Sent:> <0.000000>
+S: <Mon Feb 17 19:04:45 2020
 > Stop Receiving Tokens.
 
 
-<Sun Feb 16 19:22:27 2020
-> S process: waiting for the user to Select input
-
-
-[Sun Feb 16 19:22:27 2020
-] Stop receiving and sending tokens.
-
-
-<Sun Feb 16 19:22:29 2020
-> <Received:> <0.000000>
-<Sun Feb 16 19:22:29 2020
-> <Token Sent:> <1.000000>
-<Sun Feb 16 19:22:32 2020
-> Stop Receiving Tokens.
-
-
-[Sun Feb 16 19:22:32 2020
-] Stop receiving and sending tokens.
-
-
-[Sun Feb 16 19:22:37 2020
-] Stop receiving and sending tokens.
-
-
-<Sun Feb 16 19:22:37 2020
-> S process: waiting for the user to Select input
-
-
-<Sun Feb 16 19:22:39 2020
-> <Received:> <0.000000>
-<Sun Feb 16 19:22:39 2020
-> <Token Sent:> <1.000000>
-<Sun Feb 16 19:22:42 2020
+<Mon Feb 17 19:04:47 2020
+> <Received:> <0.000001>
+<Mon Feb 17 19:04:47 2020
+> <Token Sent:> <0.000000>
+S: <Mon Feb 17 19:04:50 2020
 > Start Receiving and Sending Tokens.
-
-
-[Sun Feb 16 19:22:42 2020
-] Receved token, seding it.
-
-
-<Sun Feb 16 19:22:48 2020
-> Stop Receiving Tokens.
-
-
-<Sun Feb 16 19:22:54 2020
-> Print Log.
-
-
-<Sun Feb 16 19:22:59 2020
-> Print Log.
-
-
-<Sun Feb 16 19:23:04 2020
-> Start Receiving and Sending Tokens.
-
-
-<Sun Feb 16 19:23:40 2020
-> Print Log.
-
-
-<Sun Feb 16 19:23:45 2020
-> Stop Receiving Tokens.
-
-
-<Sun Feb 16 19:23:50 2020
-> Start Receiving and Sending Tokens.
-
-
-<Sun Feb 16 19:23:55 2020
-> Print Log.
-
-
-<Sun Feb 16 19:24:05 2020
-> Start Receiving and Sending Tokens.
-
-
-<Sun Feb 16 19:24:14 2020
-> Stop Receiving Tokens.
-
-
-<Sun Feb 16 19:24:23 2020
-> Start Receiving and Sending Tokens.
-
-
-<Sun Feb 16 19:24:29 2020
-> Print Log.
-
-
-<Sun Feb 16 19:24:34 2020
-> Start Receiving and Sending Tokens.
-
-
-<Sun Feb 16 19:24:41 2020
-> Stop Receiving Tokens.
-
-
-<Sun Feb 16 19:25:10 2020
-> Print Log.
-
-
-<Sun Feb 16 19:25:28 2020
-> Start Receiving and Sending Tokens.
-
-
-<Sun Feb 16 19:26:22 2020
-> Stop Receiving Tokens.
-
-
-<Sun Feb 16 19:26:31 2020
-> Print Log.
 
