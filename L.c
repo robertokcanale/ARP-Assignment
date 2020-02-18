@@ -21,6 +21,9 @@ void Write_Log_Sent(float sent_token);
 
 int main(int argc, char *argv[])
 {
+  FILE * f;
+  f = fopen("Log_File.log", "w");
+  fclose(f);
 
   printf("L process: starting execution.\n");
 
@@ -34,19 +37,20 @@ int main(int argc, char *argv[])
 
 
   //read  pipe3.1
-  close(atoi(argv[6]));
+  close(atoi(argv[2]));
 
-  read(atoi(argv[5]), &token_received, sizeof(token_received));  //reading from pipe 3.1
+  read(atoi(argv[1]), &token_received, sizeof(token_received));  //reading from pipe 3.1
 
-  close(atoi(argv[5]));
+  close(atoi(argv[1]));
 
   //printf("L: Token Received: %f", token_received);
 
   //read  pipe3.2
-  close(atoi(argv[13]));
+  close(atoi(argv[4]));
 
-  read(atoi(argv[12]), &token_sent, sizeof(token_sent));  //reading from pipe 3.1
+  read(atoi(argv[3]), &token_sent, sizeof(token_sent));  //reading from pipe 3.1
 
+  close(atoi(argv[3]));
   //printf("L: Token Sent: %f", token_sent);
 
   close(atoi(argv[12]));
@@ -73,7 +77,7 @@ void Write_Log_Received(float received_token)
 
     if (f == NULL)
     {
-        printf("Cannot open file \n");
+        printf("Cannot open file. \n");
         exit(0);
     }
 
@@ -92,7 +96,7 @@ void Write_Log_Sent(float sent_token)
 
     if (f == NULL)
     {
-        printf("Cannot open file \n");
+        printf("Cannot open file. \n");
         exit(0);
     }
 

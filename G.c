@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){
         //initializing my tokens
     char token_buffer[SIZE];
     float token_to_send;
-    token_to_send = 99
+    token_to_send = 1;
 
     printf("G process: starting execution.\n");
 
@@ -43,11 +43,11 @@ int main(int argc, char *argv[]){
 
     //printf("Token to send: %s", token_buffer); should work all good!
 
-    close(atoi(argv[3]));
+    close(atoi(argv[1]));
 
-    write(atoi(argv[4]), &token_buffer, sizeof(token_buffer));
+    write(atoi(argv[2]), &token_buffer, sizeof(token_buffer));
 
-    close(atoi(argv[4]));
+    close(atoi(argv[2]));
 
     }
 

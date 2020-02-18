@@ -1,23 +1,17 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <math.h>
-#include <sys/wait.h>
+#include <strings.h>
 #include <unistd.h>
-#include <signal.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <netdb.h>
-#include <time.h>
+#include <stdio.h>
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <sys/select.h>
+#include <time.h>
 
+#define SIZE 256
 
 void error(char *msg)
 {
-perror(msg);
+printf("%s\n",msg);
 exit(0);
 }
 
@@ -31,63 +25,69 @@ exit(0);
 
 int main(int argc, char *argv[])
 {
-  printf("G_test process: starting execution.\n");
+    printf("G_test process: starting execution.\n");
+    printf("G+1: Portno =\n");
+    //initializing my tokens
+    char token_received[SIZE], token_to_send[SIZE];
+    char* pend;
 
-//initializing my tokens
-float token_received, token_to_send;
-token_received =0;
-token_to_send = 0;
 
-//Creating my CLIENT here
-int sockfd, portno, n;
-struct sockaddr_in serv_addr;
-struct hostent *server;
-char buffer[256];
+
+    //printf("G+1: Portno = %f", token_received_float);
+
+
+//creating SERVER socket
+    //variables initialization.socket
+    int sockfd, portno, newsockfd, clilen, n;
+    struct sockaddr_in serv_addr, cli_addr; // Internet addresses are here!
+    struct hostent *server;
+    portno = 8080;
+    printf("G+1: Portno = %d\n", portno);
 
     //my port number is argv[10]
-    portno = atoi(argv[10]);
+
+
+    //new socket created here
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
     if (sockfd < 0){
-        error((char*)"ERROR opening socket");
+        error((char*)"ERROR opening socket\n");
     }
 
-    //idetifying the server (on the same machine)
-    server = gethostbyname(argv[7]);
-    if (server == NULL) {
-        fprintf(stderr,"ERROR, no such host\n");
-        exit(0);
-    }
-    //variables initialization
+    //initialize socket
     bzero((char *) &serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr, server->h_length);
+    serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(portno);
 
 
-    //Trying to connect to the server!
-    if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
-        error((char*)"ERROR connecting");
-    }
-    //now that the connection is estabilshed, we can keep receivig datafrom the server through the socket!
+    //binding socket to adress
+        if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
+            error((char*)"ERROR on binding\n");
+        }
+    listen(sockfd, 5);
+    clilen = sizeof(cli_addr);
 
-    while(1){
+    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr,  (socklen_t*)&clilen);
+    if (newsockfd < 0){
+         error((char*)"ERROR on accepting the client\n");
+    }
+
+    //while(1) actually should use a while
+
+    for (int i = 0; i <50; i++){
+
     //read from Socket
-    n = read(sockfd, &token_received, sizeof(token_received));
+    n = read(newsockfd, &token_received, sizeof(token_received));
     if (n < 0)
-    error((char*)"ERROR reading from socket");
-    printf("%s\n",buffer);
+    error((char*)"ERROR reading from socket\n");
+    printf("%s\n", token_received);
+
+    //token_received_float = strtof(token_received, &pend);
+    //printf("Float received on Socket: %f", token_received_float);
 
     //write on PIPE (which pipe? user who receives this should properly configure argv numbers
 
-    token_to_send = token_received;
-
-    close(atoi(argv[1]));
-
-    write(atoi(argv[2]), &token_to_send, sizeof(token_to_send));
-
-    close(atoi(argv[2]));
-
-    //Write a PIPE to the pass tokens received to the next P
     }
-    }
+    return 0;
+}

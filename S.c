@@ -13,68 +13,87 @@
 #include <sys/select.h>
 
 #define SIZE 256
+int pipe1[2];
+
 
 void Print_Log();
 void Write_Log(char string[50]);
 
+void Sig_Handler1(int signo){
 
+    char Signal_select[SIZE];
+
+
+    printf("received SIGUSR1: Start Sending Tokens.\n");
+    Write_Log((char*)"Start Receiving and Sending Tokens.\n");
+
+    strcpy(Signal_select, "1");
+
+    //write 1 on  pipe1
+    close(pipe1[0]);
+
+    write(pipe1[1], &Signal_select, sizeof(Signal_select));
+
+    close(pipe1[1]);
+
+}
+
+
+
+void Sig_Handler2(int signo){
+
+    char Signal_select[SIZE];
+
+    printf("received SIGUSR2: Stop Sending Tokens.\n");
+    Write_Log((char*)"Stop Receiving Tokens.\n");
+
+    strcpy(Signal_select, "0");
+
+    //write on 0  pipe1
+    close(pipe1[0]);
+
+    write(pipe1[1], &Signal_select, sizeof(Signal_select));
+
+    close(pipe1[1]);
+
+ }
+
+    void Sig_Handler3(int signo){
+
+    //Print the LOG
+
+    printf("received SIGINT: Printing Log.\n");
+    Write_Log((char*)"Print Log.\n");
+    Print_Log(); // Prints out the Log File
+}
 
 int main(int argc, char *argv[]){
 
 printf("S process: starting execution.\n");
 
-int selection = 0;
-char Signal_select[SIZE];
+int console_signal;
+pipe1[0] = atoi(argv[1]);
+pipe1[0] = atoi(argv[2]);
 
 Write_Log((char*)"S process: waiting for the user to Select input\n");
 printf("\nThere are 3 available inputs.\n");
-printf("\n1 - Start Receiving Tokens \n2 - Stop Receiving Tokens \n3 - Output Log File");
-printf("\nPlease select 1, 2 or 3:\n");
-while(1)
-    {
+printf("\nSIGUSR1 - Start Receiving Tokens \nSIGUSR2 - Stop Receiving Tokens \nSIGINT - Output Log File\n");
+printf("\nIn another terminal, please write \nkillall  (SIGUSR1 or SIGUSR2 or SIGINT) S\n");
+printf("\nPlease select SIGUSR1, SIGUSR2 or SIGINT:\n");
 
-        scanf("%d", &selection);//take the input
+if (signal(SIGUSR1, Sig_Handler1) == SIG_ERR){
+printf("\ncan't catch SIGUSR1\n");
+}
 
+if (signal(SIGUSR2, Sig_Handler2) == SIG_ERR){
+printf("\ncan't catch SIGUSR2\n");
+}
 
-        if(selection == 1){//Start Receiving Tokens
+if (signal(SIGINT, Sig_Handler3) == SIG_ERR){
+printf("\ncan't catch SIGINT\n");int selection = 0;
+}
 
-            strcpy(Signal_select, "1");
-            //write on  pipe1
-            close(atoi(argv[1]));
-
-            write(atoi(argv[2]), &Signal_select, sizeof(Signal_select));
-
-            close(atoi(argv[2]));
-
-            printf("\nStart, Signal_select = %s\n", Signal_select);
-
-            Write_Log((char*)"Start Receiving and Sending Tokens.\n");
-
-        } else if(selection == 2 ){ //Stop Receiving Tokens
-
-            strcpy(Signal_select, "0");
-            //write on  pipe1
-            close(atoi(argv[1]));
-
-            write(atoi(argv[2]), &Signal_select, sizeof(Signal_select));
-
-            close(atoi(argv[2]));
-
-            printf("\nStop, Signal_select = %s\n", Signal_select);
-
-            Write_Log((char*)"Stop Receiving Tokens.\n");
-
-        } else if( selection == 3 ){ //Dump log File
-
-            Write_Log((char*)"Print Log.\n");
-            Print_Log(); // Prints out the Log File
-
-        } else {
-            Write_Log((char*)"S process: User inserted invalid choice.\n");
-            printf("\nInvalid choice.\n");//user inserted invalid process number
-        }
-
-    sleep(5);
+while(1){
     }
 }
 
