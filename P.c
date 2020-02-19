@@ -11,6 +11,7 @@
 #include <fcntl.h>
 #include <netinet/in.h>
 #include <time.h>
+#include <arpa/inet.h>
 
 
 #define SIZE 256
@@ -21,6 +22,11 @@ void error(char *msg);
 
 void Write_Log(char string[50]);
 
+void ftoa(float n, char* res, int afterpoint) ;
+
+int intToStr(int x, char str[], int d);
+
+void reverse(char* str, int len);
 
 int main(int argc, char *argv[]){
 
@@ -29,7 +35,7 @@ printf("P process: starting execution.\n");
 //variables initialization.general
     fd_set file_descriptor_select;
     int  signal_received_int, my_select, max_fd, res;
-    float token_received_float, token_to_send, DT, R_Frequency;  //I initialize R_frequency as a global variable in Lanucher (maybe better in header?
+    float token_received_float, token_to_send_float, DT, R_Frequency;  //I initialize R_frequency as a global variable in Lanucher (maybe better in header?
     int fd1 = atoi(argv[1]); //reads the two  file descriptors of pipe1 and 2
     int fd2 = atoi(argv[3]); //these are for reading pipe1 and pipe2
     time_t t_received, t_sent;
@@ -37,60 +43,62 @@ printf("P process: starting execution.\n");
     //buffers for my select pipes
     char signal_received[SIZE];
     char token_received[SIZE];
+    char token_to_send[SIZE];
 
     R_Frequency = atof(argv[14]); //giving a value to my RF
 
-    token_received_float = 0;
-    token_to_send = 0;
+    token_received_float = 0.0f;
+    token_to_send_float = 0.0f;
 
-//creating SERVER socket
-    //variables initialization.socket
-    int sockfd, portno, newsockfd, clilen, n;
-    struct sockaddr_in serv_addr, cli_addr; // Internet addresses are here!
-    struct hostent *server;
 
+    //Creating my CLIENT here
+int sockfd, portno, n;
+struct sockaddr_in serv_addr;
 
     //my port number is argv[10]
     portno = atoi(argv[10]);
-    //initialize socket
-    bzero((char *) &serv_addr, sizeof(serv_addr));
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = INADDR_ANY;
-    serv_addr.sin_port = htons(portno);
-
-
-    //new socket created here
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
     if (sockfd < 0){
-        error((char*)"ERROR opening socket");
+        error((char*)"ERROR opening socket\n");
     }
 
-    //setting the buffer to 0, initializing the server socket
-    bzero((char *) &serv_addr, sizeof(serv_addr));
-    serv_addr.sin_family = AF_INET; //address family
-    serv_addr.sin_port = htons(portno); //contains port number
-    serv_addr.sin_addr.s_addr = INADDR_ANY; //contains host IP
 
-    //binding socket to adress
-        if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
-            error((char*)"ERROR on binding");
-        }
+    //variables initialization
+    bzero((char *) &serv_addr, sizeof(serv_addr));
+
+    //idetifying the server (on the same machine)
+    if(inet_pton(AF_INET, argv[9], &serv_addr.sin_addr)<=0) {
+        error((char*)"Invalid address:Address not supported\n");
+    }
+
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(portno);
+
+
+    //Trying to connect to the server!
+    if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
+        error((char*)"ERROR connecting\n");
+    }
+    //now that the connection is estabilshed, we can keep receivig datafrom the server through the socket!
+
 
 
 
     while(1){
+
     //Stuff needed for the select
     FD_ZERO(&file_descriptor_select); //initialize file_descriptor_select to 0
     FD_SET(fd1, &file_descriptor_select); //Sets the bit for the file descriptor fd1 in the file descriptor set file_descriptor_select
     FD_SET(fd2, &file_descriptor_select); //Sets the bit for the file descriptor fd2 in the file descriptor set file_descriptor_select
+
 
     max_fd = fd1 >fd2 ? fd1 : fd2;
 
 
     my_select = select(max_fd+1, &file_descriptor_select, NULL, NULL, NULL);
 
-    if (my_select == -1) {error((char*)"Error with select()");}
+    if (my_select == -1) {error((char*)"Error with select()\n");}
 
 
     if (FD_ISSET(fd1, &file_descriptor_select))
@@ -112,7 +120,7 @@ printf("P process: starting execution.\n");
         res = read(fd2, &token_received, sizeof(token_received));
 
         //convert from char buffer to float
-        token_received_float = (float)atof(token_received);
+        token_received_float = atof(token_received);
 
         t_received = time(NULL);
 
@@ -122,7 +130,7 @@ printf("P process: starting execution.\n");
         }
       }
 
-    //printf("P gets here. signal_receive_int = %d, token_received: %f\n", signal_received_int,token_received_float);
+    printf("P gets here. signal_receive_int = %d, token_received: %f\n", signal_received_int,token_received_float);
 
     //now perform operations according to the received signal
     if(signal_received_int == 1){ //Start Receiving Tokens and sending them!
@@ -133,26 +141,17 @@ printf("P process: starting execution.\n");
 
                 //interface here to SEND TOKENS OVER THE SOCKET
 
-                // listen for socket connections (i.e. if any client is connecting)
-                listen(sockfd,5);
-
-                // a new connection can arrive from a client, handled here, and checked if it is accepted
-                clilen = sizeof(cli_addr);
-                newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr,  (socklen_t*)&clilen);
-                if (newsockfd < 0){
-                error((char*)"ERROR on accepting the client");
-                }
-
                 //COMPUTING Token to Send
                 t_sent = time(NULL);
                 DT = difftime( t_sent, t_received);
-                token_to_send = New_Token(token_received_float, DT, R_Frequency); //smt here, it's the result of New_Token() operation
+                token_to_send_float = New_Token(token_received_float, DT, R_Frequency); //smt here, it's the result of New_Token() operation
+                ftoa(token_to_send_float, token_to_send, 5);
 
                 //writing on socket
-                n = write(sockfd, &token_to_send, sizeof(token_to_send));//write on socket
+                n = write(sockfd, &token_to_send, SIZE);//write on socket
                 if (n < 0)//check on writing
                     {
-                        error((char*)"\nERROR writing to socket.");
+                        error((char*)"\nERROR writing to socket.\n");
                     }
 
             } else if(signal_received_int == 0){ //Stop receiving tokens and sending them
@@ -165,7 +164,7 @@ printf("P process: starting execution.\n");
             printf("\nSomething went really wrong.\n");
                 }
 
-    //sending data to the L pipe outside of the if but inside the while
+    //sending data to the L pipe outside
 
     //write on  pipe3.1
 
@@ -173,16 +172,17 @@ printf("P process: starting execution.\n");
 
     write(atoi(argv[6]), &token_received, sizeof(token_received));
 
-    close(atoi(argv[6]));
 
     //write on  pipe3.2
 
-    close(atoi(argv[12]));
+    close(atoi(argv[7]));
 
-    write(atoi(argv[13]), &token_to_send, sizeof(token_to_send));
+    write(atoi(argv[7]), &token_to_send, sizeof(token_to_send));
 
-    close(atoi(argv[13]));
+    memset(token_received, 0, SIZE);
+    memset(token_to_send, 0, SIZE);
 
+    sleep(1);
     }// end of while
 return 0;
 
@@ -221,3 +221,64 @@ void Write_Log(char string[50])
     fclose(f);
 }
 
+
+
+// Reverses a string 'str' of length 'len'
+void reverse(char* str, int len)
+{
+    int i = 0, j = len - 1, temp;
+    while (i < j) {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+        i++;
+        j--;
+    }
+}
+
+// Converts a given integer x to string str[].
+// d is the number of digits required in the output.
+// If d is more than the number of digits in x,
+// then 0s are added at the beginning.
+int intToStr(int x, char str[], int d)
+{
+    int i = 0;
+    while (x) {
+        str[i++] = (x % 10) + '0';
+        x = x / 10;
+    }
+
+    // If number of digits required is more, then
+    // add 0s at the beginning
+    while (i < d)
+        str[i++] = '0';
+
+    reverse(str, i);
+    str[i] = '\0';
+    return i;
+}
+
+// Converts a floating-point/double number to a string.
+void ftoa(float n, char* res, int afterpoint)
+{
+    // Extract integer part
+    int ipart = (int)n;
+
+    // Extract floating part
+    float fpart = n - (float)ipart;
+
+    // convert integer part to string
+    int i = intToStr(ipart, res, 0);
+
+    // check for display option after point
+    if (afterpoint != 0) {
+        res[i] = '.'; // add dot
+
+        // Get the value of fraction part upto given no.
+        // of points after dot. The third parameter
+        // is needed to handle cases like 233.007
+        fpart = fpart * pow(10, afterpoint);
+
+        intToStr((int)fpart, res + i + 1, afterpoint);
+    }
+}

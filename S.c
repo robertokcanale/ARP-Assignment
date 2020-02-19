@@ -14,6 +14,7 @@
 
 #define SIZE 256
 int pipe1[2];
+int flag1, flag2, flag_log;
 
 
 void Print_Log();
@@ -21,50 +22,21 @@ void Write_Log(char string[50]);
 
 void Sig_Handler1(int signo){
 
-    char Signal_select[SIZE];
-
-
-    printf("received SIGUSR1: Start Sending Tokens.\n");
-    Write_Log((char*)"Start Receiving and Sending Tokens.\n");
-
-    strcpy(Signal_select, "1");
-
-    //write 1 on  pipe1
-    close(pipe1[0]);
-
-    write(pipe1[1], &Signal_select, sizeof(Signal_select));
-
-    close(pipe1[1]);
+    flag1 = 1;
 
 }
 
 
-
 void Sig_Handler2(int signo){
 
-    char Signal_select[SIZE];
-
-    printf("received SIGUSR2: Stop Sending Tokens.\n");
-    Write_Log((char*)"Stop Receiving Tokens.\n");
-
-    strcpy(Signal_select, "0");
-
-    //write on 0  pipe1
-    close(pipe1[0]);
-
-    write(pipe1[1], &Signal_select, sizeof(Signal_select));
-
-    close(pipe1[1]);
+  flag2 = 1;
 
  }
 
     void Sig_Handler3(int signo){
 
-    //Print the LOG
+    flag_log = 1;
 
-    printf("received SIGINT: Printing Log.\n");
-    Write_Log((char*)"Print Log.\n");
-    Print_Log(); // Prints out the Log File
 }
 
 int main(int argc, char *argv[]){
@@ -73,7 +45,7 @@ printf("S process: starting execution.\n");
 
 int console_signal;
 pipe1[0] = atoi(argv[1]);
-pipe1[0] = atoi(argv[2]);
+pipe1[1] = atoi(argv[2]);
 
 Write_Log((char*)"S process: waiting for the user to Select input\n");
 printf("\nThere are 3 available inputs.\n");
@@ -93,7 +65,55 @@ if (signal(SIGINT, Sig_Handler3) == SIG_ERR){
 printf("\ncan't catch SIGINT\n");int selection = 0;
 }
 
+char Signal_select[SIZE];
+
 while(1){
+
+    if (flag1 == 1 ){
+
+    printf("received SIGUSR1: Start Sending Tokens.\n");
+    Write_Log((char*)"Start Receiving and Sending Tokens.\n");
+
+    strcpy(Signal_select, "1");
+
+    //write 1 on  pipe1
+    close(pipe1[0]);
+
+    write(pipe1[1], &Signal_select, sizeof(Signal_select));
+
+    }
+
+    if (flag2 == 1 ){
+
+    printf("received SIGUSR2: Stop Sending Tokens.\n");
+    Write_Log((char*)"Stop Receiving Tokens.\n");
+
+    strcpy(Signal_select, "0");
+
+    //write on 0  pipe1
+    close(pipe1[0]);
+
+    write(pipe1[1], &Signal_select, sizeof(Signal_select));
+
+
+    }
+
+    if (flag_log == 1 ){
+
+    //Print the LOG
+
+    printf("received SIGINT: Printing Log.\n");
+    Write_Log((char*)"Print Log.\n");
+    Print_Log(); // Prints out the Log File
+
+    }
+
+    flag1 = 0;
+    flag2 = 0;
+    flag_log = 0;
+
+    memset(Signal_select, 0, SIZE);
+
     }
 }
 

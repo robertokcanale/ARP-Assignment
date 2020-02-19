@@ -41,13 +41,12 @@ int main(int argc, char *argv[]){
     }
     ftoa(token_to_send, token_buffer, 5);
 
-    //printf("Token to send: %s", token_buffer); should work all good!
+    //printf("Token to send: %s", token_buffer); //should work all good!
 
     close(atoi(argv[1]));
 
     write(atoi(argv[2]), &token_buffer, sizeof(token_buffer));
 
-    close(atoi(argv[2]));
 
     }
 
@@ -70,9 +69,6 @@ void Write_Log_Sent(float sent_token)
     fprintf(f, "\n<%s> <G: Token Sent:> <%f>", asctime(tm), sent_token );
     fclose(f);
 }
-
-
-
 
 // Reverses a string 'str' of length 'len'
 void reverse(char* str, int len)

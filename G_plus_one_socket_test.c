@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     int sockfd, portno, newsockfd, clilen, n;
     struct sockaddr_in serv_addr, cli_addr; // Internet addresses are here!
     struct hostent *server;
-    portno = 8080;
+    portno = 9999;
     printf("G+1: Portno = %d\n", portno);
 
     //my port number is argv[10]
@@ -73,9 +73,7 @@ int main(int argc, char *argv[])
          error((char*)"ERROR on accepting the client\n");
     }
 
-    //while(1) actually should use a while
-
-    for (int i = 0; i <50; i++){
+    while(1) {
 
     //read from Socket
     n = read(newsockfd, &token_received, sizeof(token_received));

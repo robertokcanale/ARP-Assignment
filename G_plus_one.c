@@ -44,7 +44,7 @@ char buffer[256];
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
     if (sockfd < 0){
-        error((char*)"ERROR opening socket");
+        error((char*)"ERROR opening socket\n");
     }
 
     //Identifying my server with MY IP = argv[7]
@@ -62,7 +62,7 @@ char buffer[256];
 
     //Trying to connect to the server!
     if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
-        error((char*)"ERROR connecting");
+        error((char*)"ERROR connecting\n");
     }
     //now that the connection is estabilshed, we can keep receivig datafrom the server through the socket!
 
@@ -72,7 +72,7 @@ char buffer[256];
         //read from Socket
     n = read(sockfd, &token_received, sizeof(token_received));
     if (n < 0)
-    error((char*)"ERROR reading from socket");
+    error((char*)"ERROR reading from socket\n");
     printf("%s\n",buffer);
 
     //write on pipe
