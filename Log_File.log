@@ -1,540 +1,308 @@
 
-S: <Wed Feb 19 15:24:53 2020
+S: <Wed Feb 19 18:22:32 2020
 > S process: waiting for the user to Select input
 
 
-S: <Wed Feb 19 15:24:59 2020
+P: <Wed Feb 19 18:22:32 2020
+> P: Received token, seding it.
+
+
+P: <Wed Feb 19 18:22:34 2020
+> P: Received token, seding it.
+
+
+P: <Wed Feb 19 18:22:36 2020
+> P: Received token, seding it.
+
+
+P: <Wed Feb 19 18:22:38 2020
+> P: Received token, seding it.
+
+
+P: <Wed Feb 19 18:22:40 2020
+> P: Received token, seding it.
+
+
+P: <Wed Feb 19 18:22:42 2020
+> P: Received token, seding it.
+
+
+P: <Wed Feb 19 18:22:44 2020
+> P: Received token, seding it.
+
+
+P: <Wed Feb 19 18:22:46 2020
+> P: Received token, seding it.
+
+
+S: <Wed Feb 19 18:22:46 2020
 > Start Receiving and Sending Tokens.
 
 
-P: <Wed Feb 19 15:25:00 2020
+S: <Wed Feb 19 18:22:46 2020
+> Start Receiving and Sending Tokens.
+
+
+S: <Wed Feb 19 18:22:46 2020
+> Start Receiving and Sending Tokens.
+
+
+P: <Wed Feb 19 18:22:48 2020
 > P: Received token, seding it.
 
 
-P: <Wed Feb 19 15:25:01 2020
+P: <Wed Feb 19 18:22:50 2020
 > P: Received token, seding it.
 
 
-P: <Wed Feb 19 15:25:02 2020
+P: <Wed Feb 19 18:22:52 2020
 > P: Received token, seding it.
 
 
-P: <Wed Feb 19 15:25:03 2020
+P: <Wed Feb 19 18:22:54 2020
 > P: Received token, seding it.
 
 
-P: <Wed Feb 19 15:25:04 2020
+P: <Wed Feb 19 18:22:56 2020
 > P: Received token, seding it.
 
 
-P: <Wed Feb 19 15:25:05 2020
+P: <Wed Feb 19 18:22:58 2020
 > P: Received token, seding it.
 
 
-P: <Wed Feb 19 15:25:06 2020
+P: <Wed Feb 19 18:23:00 2020
 > P: Received token, seding it.
 
 
-S: <Wed Feb 19 15:25:07 2020
+S: <Wed Feb 19 18:23:00 2020
 > Stop Receiving Tokens.
 
 
-P: <Wed Feb 19 15:25:07 2020
+P: <Wed Feb 19 18:23:02 2020
 > P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:08 2020
+P: <Wed Feb 19 18:23:04 2020
 > P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:09 2020
+P: <Wed Feb 19 18:23:06 2020
 > P: Stop receiving and sending tokens.
 
 
-S: <Wed Feb 19 15:25:10 2020
-> Start Receiving and Sending Tokens.
-
-
-P: <Wed Feb 19 15:25:10 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:11 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:12 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:13 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:14 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:15 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:16 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:17 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:18 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:19 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:20 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:21 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:22 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:23 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:24 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:25 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:26 2020
-> P: Received token, seding it.
-
-
-S: <Wed Feb 19 15:25:27 2020
-> Print Log.
-
-
-P: <Wed Feb 19 15:25:27 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:28 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:29 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:30 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:31 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:32 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:25:33 2020
-> P: Received token, seding it.
-
-
-S: <Wed Feb 19 15:25:33 2020
-> Stop Receiving Tokens.
-
-
-P: <Wed Feb 19 15:25:34 2020
+P: <Wed Feb 19 18:23:08 2020
 > P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:35 2020
+P: <Wed Feb 19 18:23:10 2020
 > P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:36 2020
+P: <Wed Feb 19 18:23:12 2020
 > P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:37 2020
+P: <Wed Feb 19 18:23:14 2020
 > P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:38 2020
+P: <Wed Feb 19 18:23:16 2020
 > P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:39 2020
+P: <Wed Feb 19 18:23:18 2020
 > P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:40 2020
+P: <Wed Feb 19 18:23:20 2020
 > P: Stop receiving and sending tokens.
 
 
-S: <Wed Feb 19 15:25:41 2020
-> Start Receiving and Sending Tokens.
+P: <Wed Feb 19 18:23:22 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:41 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:24 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:42 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:26 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:43 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:28 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:44 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:30 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:45 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:32 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:46 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:34 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:47 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:36 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:48 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:38 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:49 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:40 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:50 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:42 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:51 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:44 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:52 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:46 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:53 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:48 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:54 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:50 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:55 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:52 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:56 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:54 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:57 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:56 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:58 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:23:58 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:25:59 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:00 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:00 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:02 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:01 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:04 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:02 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:06 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:03 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:08 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:04 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:10 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:05 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:12 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:06 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:14 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:07 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:16 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:08 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:18 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:09 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:20 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:10 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:22 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:11 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:24 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:12 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:26 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:13 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:28 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:14 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:30 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:15 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:32 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:16 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:34 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:17 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:36 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:18 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:38 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:19 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:40 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:20 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:42 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:21 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:44 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:22 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:46 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:23 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:48 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:24 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:50 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:25 2020
-> P: Received token, seding it.
+P: <Wed Feb 19 18:24:52 2020
+> P: Stop receiving and sending tokens.
 
 
-P: <Wed Feb 19 15:26:26 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:27 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:28 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:29 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:30 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:31 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:32 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:33 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:34 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:35 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:36 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:37 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:38 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:39 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:40 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:41 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:42 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:43 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:44 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:45 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:46 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:47 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:48 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:49 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:50 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:51 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:52 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:53 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:54 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:55 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:56 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:57 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:58 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:26:59 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:27:00 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:27:01 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:27:02 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:27:03 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:27:04 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:27:05 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 15:27:06 2020
-> P: Received token, seding it.
-
-
-S: <Wed Feb 19 15:27:07 2020
-> Print Log.
+P: <Wed Feb 19 18:24:54 2020
+> P: Stop receiving and sending tokens.
 

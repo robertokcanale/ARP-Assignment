@@ -46,7 +46,7 @@ printf("P process: starting execution.\n");
     char token_to_send[SIZE];
 
     R_Frequency = atof(argv[14]); //giving a value to my RF
-
+    signal_received_int= 1;
     token_received_float = 0.0f;
     token_to_send_float = 0.0f;
 
@@ -114,7 +114,8 @@ struct sockaddr_in serv_addr;
             printf("Read %d bytes from Pipe1: %d\n", res, signal_received_int);
         }
     }
-    if (FD_ISSET(fd2, &file_descriptor_select))
+
+    if (FD_ISSET(fd2, &file_descriptor_select) && (signal_received_int == 1))
     {
         // We can read from fd2
         res = read(fd2, &token_received, sizeof(token_received));
@@ -130,14 +131,13 @@ struct sockaddr_in serv_addr;
         }
       }
 
-    printf("P gets here. signal_receive_int = %d, token_received: %f\n", signal_received_int,token_received_float);
+    printf("P: signal_receive_int = %d\n", signal_received_int);
 
     //now perform operations according to the received signal
     if(signal_received_int == 1){ //Start Receiving Tokens and sending them!
 
                 //write on the log
                 Write_Log((char*)"P: Received token, seding it.\n");
-                printf("\nP: Receiving and sending tokens. Token Received: %f.\n", token_received_float);
 
                 //interface here to SEND TOKENS OVER THE SOCKET
 
@@ -146,6 +146,8 @@ struct sockaddr_in serv_addr;
                 DT = difftime( t_sent, t_received);
                 token_to_send_float = New_Token(token_received_float, DT, R_Frequency); //smt here, it's the result of New_Token() operation
                 ftoa(token_to_send_float, token_to_send, 5);
+
+                printf("\nP: Receiving and sending tokens.\nToken Received: %f.\nToken Sent: %f\n", token_received_float, token_to_send_float);
 
                 //writing on socket
                 n = write(sockfd, &token_to_send, SIZE);//write on socket
@@ -157,10 +159,9 @@ struct sockaddr_in serv_addr;
             } else if(signal_received_int == 0){ //Stop receiving tokens and sending them
 
                 Write_Log((char*)"P: Stop receiving and sending tokens.\n");
-                //printf("\nP: Stop receiving and sending tokens.\n");
+                printf("\nP: Stop receiving and sending tokens.\n");
 
             } else {
-
             printf("\nSomething went really wrong.\n");
                 }
 
@@ -177,12 +178,12 @@ struct sockaddr_in serv_addr;
 
     close(atoi(argv[7]));
 
-    write(atoi(argv[7]), &token_to_send, sizeof(token_to_send));
+    write(atoi(argv[8]), &token_to_send, sizeof(token_to_send));
 
     memset(token_received, 0, SIZE);
     memset(token_to_send, 0, SIZE);
 
-    sleep(1);
+    sleep(2);
     }// end of while
 return 0;
 

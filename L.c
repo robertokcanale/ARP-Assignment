@@ -40,19 +40,16 @@ int main(int argc, char *argv[])
 
 
     //read  pipe3.1
-    close(atoi(argv[2]));
 
     read(atoi(argv[1]), &token_received, sizeof(token_received));  //reading from pipe 3.1
 
-
-    //printf("L: Token Received: %f", token_received);
+    printf((char*)"L: Token Received: %f\n", token_received_float);
 
     //read  pipe3.2
-    close(atoi(argv[4]));
 
     read(atoi(argv[3]), &token_sent, sizeof(token_sent));  //reading from pipe 3.1
 
-    //printf("L: Token Sent: %f", token_sent);
+    printf((char*)"L: Token Sent: %f\n", token_sent_float);
 
     token_received_float = atof(token_received);
     token_sent_float = atof(token_sent);

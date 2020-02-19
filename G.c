@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 
     write(atoi(argv[2]), &token_buffer, sizeof(token_buffer));
 
-
+    sleep(2);
     }
 
 }

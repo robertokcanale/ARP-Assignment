@@ -113,6 +113,7 @@ while(1){
     flag_log = 0;
 
     memset(Signal_select, 0, SIZE);
+    sleep(2);
 
     }
 }

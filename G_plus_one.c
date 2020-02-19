@@ -13,81 +13,156 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/select.h>
-#include "functions.h"
 
-void error(char *msg);
+#define SIZE 256
 
-
-//little guide for this, most of it is already written.
-// CORRECT the ARGV[i] indexes for :
-//-the PORT NUMBER when executing this file!
-//-the IP
-//-the close and write pipes when sending arguments
-
-int main(int argc, char *argv[])
+void error(char *msg)
 {
-    //initializing my tokens
-    char token_received[SIZE];
-    float token_to_send;
-    token_to_send = 0;
+printf("%s\n",msg);
+exit(0);
+}
 
-    printf("G process: starting execution.\n");
+void Write_Log_Sent(float sent_token);
 
-//Creating my CLIENT here
-int sockfd, portno, n;
-struct sockaddr_in serv_addr;
-struct hostent *server;
-char buffer[256];
+void ftoa(float n, char* res, int afterpoint) ;
+int intToStr(int x, char str[], int d);
+void reverse(char* str, int len);
+
+int main(int argc, char *argv[]){
+    printf("G_test process: starting execution.\n");
+
+//creating SERVER socket
+    //variables initialization.socket
+    int sockfd, portno, newsockfd, clilen, n;
+    struct sockaddr_in serv_addr, cli_addr; // Internet addresses are here!
+    struct hostent *server;
+    portno = 9999;
+    printf("G+1: Portno = %d\n", portno);
 
     //my port number is argv[10]
-    portno = atoi(argv[10]);
+
+
+    //new socket created here
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
     if (sockfd < 0){
         error((char*)"ERROR opening socket\n");
     }
 
-    //Identifying my server with MY IP = argv[7]
-    server = gethostbyname(argv[7]);
-    if (server == NULL) {
-        fprintf(stderr,"ERROR, no such host\n");
+    //initialize socket
+    bzero((char *) &serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_addr.s_addr = INADDR_ANY;
+    serv_addr.sin_port = htons(portno);
+
+
+    //binding socket to adress
+        if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
+            error((char*)"ERROR on binding\n");
+        }
+    listen(sockfd, 5);
+    clilen = sizeof(cli_addr);
+
+    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr,  (socklen_t*)&clilen);
+    if (newsockfd < 0){
+         error((char*)"ERROR on accepting the client\n");
+    }
+
+    //initializing my tokens
+    char token_buffer[SIZE];
+
+    while(1) {
+
+    //read from Socket
+    n = read(newsockfd, &token_buffer, sizeof(token_buffer));
+    if (n < 0)
+    error((char*)"ERROR reading from socket\n");
+
+
+    close(atoi(argv[1]));
+
+    write(atoi(argv[2]), &token_buffer, sizeof(token_buffer));
+
+
+    }
+
+}
+
+void Write_Log_Sent(float sent_token)
+{
+    FILE * f;
+    time_t t = time(NULL);
+    struct tm * tm = localtime(&t);
+
+    f = fopen("Log_File.log", "a+");
+
+    if (f == NULL)
+    {
+        printf("Cannot open file \n");
         exit(0);
     }
 
-    //fSetting needed fields here!
-    bzero((char *) &serv_addr, sizeof(serv_addr));
-    serv_addr.sin_family = AF_INET;
-    bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr,server->h_length);
-    serv_addr.sin_port = htons(portno);
+    fprintf(f, "\n<%s> <G: Token Sent:> <%f>", asctime(tm), sent_token );
+    fclose(f);
+}
 
-    //Trying to connect to the server!
-    if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
-        error((char*)"ERROR connecting\n");
-    }
-    //now that the connection is estabilshed, we can keep receivig datafrom the server through the socket!
-
-
-
-    while(1){
-        //read from Socket
-    n = read(sockfd, &token_received, sizeof(token_received));
-    if (n < 0)
-    error((char*)"ERROR reading from socket\n");
-    printf("%s\n",buffer);
-
-    //write on pipe
-    close(atoi(argv[1]));
-
-    write(atoi(argv[2]), &token_received, sizeof(token_received));
-
-    close(atoi(argv[2]));
-
+// Reverses a string 'str' of length 'len'
+void reverse(char* str, int len)
+{
+    int i = 0, j = len - 1, temp;
+    while (i < j) {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+        i++;
+        j--;
     }
 }
 
-
-void error(char *msg)
+// Converts a given integer x to string str[].
+// d is the number of digits required in the output.
+// If d is more than the number of digits in x,
+// then 0s are added at the beginning.
+int intToStr(int x, char str[], int d)
 {
-perror(msg);
-exit(0);
+    int i = 0;
+    while (x) {
+        str[i++] = (x % 10) + '0';
+        x = x / 10;
+    }
+
+    // If number of digits required is more, then
+    // add 0s at the beginning
+    while (i < d)
+        str[i++] = '0';
+
+    reverse(str, i);
+    str[i] = '\0';
+    return i;
+
+}
+
+// Converts a floating-point/double number to a string.
+void ftoa(float n, char* res, int afterpoint)
+{
+    // Extract integer part
+    int ipart = (int)n;
+
+    // Extract floating part
+    float fpart = n - (float)ipart;
+
+    // convert integer part to string
+    int i = intToStr(ipart, res, 0);
+
+    // check for display option after point
+    if (afterpoint != 0) {
+        res[i] = '.'; // add dot
+
+        // Get the value of fraction part upto given no.
+        // of points after dot. The third parameter
+        // is needed to handle cases like 233.007
+        fpart = fpart * pow(10, afterpoint);
+
+        intToStr((int)fpart, res + i + 1, afterpoint);
+    }
 }

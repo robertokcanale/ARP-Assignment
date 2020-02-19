@@ -85,9 +85,9 @@ int main()
 
     //arrays containing data to pass to the exec
     char *argP[13];
-    char *argG[3];
-    char *argS[3];
-    char *argL[5];
+    char *argG[4];
+    char *argS[4];
+    char *argL[6];
 
     char r_arg1[5]; //read pipe1
     char w_arg1[5]; //write pipe1
@@ -129,14 +129,17 @@ int main()
     argL[2] = w_arg3; //write, pipe3.1
     argL[3] = r_arg4; //read, pipe3.2
     argL[4] = w_arg4; //read, pipe3.2
+    argL[5] = NULL;
 
     //Arg for S
     argS[1] = r_arg1; //read, pipe1
     argS[2] = w_arg1; //write, pipe1
+    argL[3] = NULL;
 
     //Arg for G
     argG[1] = r_arg2; //read, pipe2
     argG[2] = w_arg2; //write, pipe2
+    argL[3] = NULL;
 
     //starting from P
     processP = fork();//Creates child process
