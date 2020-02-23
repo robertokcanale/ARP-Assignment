@@ -20,100 +20,112 @@ int flag1, flag2, flag_log;
 void Print_Log();
 void Write_Log(char string[50]);
 
-void Sig_Handler1(int signo){
+void Sig_Handler1(int signo)
+{
 
     flag1 = 1;
 
 }
 
 
-void Sig_Handler2(int signo){
+void Sig_Handler2(int signo)
+{
 
-  flag2 = 1;
+    flag2 = 1;
 
- }
+}
 
-    void Sig_Handler3(int signo){
+void Sig_Handler3(int signo)
+{
 
     flag_log = 1;
 
 }
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
 
-printf("S process: starting execution.\n");
+    printf("S process: starting execution.\n");
 
-int console_signal;
-pipe1[0] = atoi(argv[1]);
-pipe1[1] = atoi(argv[2]);
+    int console_signal;
+    pipe1[0] = atoi(argv[1]);
+    pipe1[1] = atoi(argv[2]);
 
-Write_Log((char*)"S process: waiting for the user to Select input\n");
-printf("\nThere are 3 available inputs.\n");
-printf("\nSIGUSR1 - Start Receiving Tokens \nSIGUSR2 - Stop Receiving Tokens \nSIGINT - Output Log File\n");
-printf("\nIn another terminal, please write \nkillall  (SIGUSR1 or SIGUSR2 or SIGINT) S\n");
-printf("\nPlease select SIGUSR1, SIGUSR2 or SIGINT:\n");
+    Write_Log((char*)"S process: waiting for the user to Select input\n");
+    printf("\nThere are 3 available inputs.\n");
+    printf("\nSIGUSR1 - Start Receiving Tokens \nSIGUSR2 - Stop Receiving Tokens \nSIGINT - Output Log File\n");
+    printf("\nIn another terminal, please write \nkillall  (SIGUSR1 or SIGUSR2 or SIGINT) S\n");
+    printf("\nPlease select SIGUSR1, SIGUSR2 or SIGINT:\n");
 
-if (signal(SIGUSR1, Sig_Handler1) == SIG_ERR){
-printf("\ncan't catch SIGUSR1\n");
-}
-
-if (signal(SIGUSR2, Sig_Handler2) == SIG_ERR){
-printf("\ncan't catch SIGUSR2\n");
-}
-
-if (signal(SIGINT, Sig_Handler3) == SIG_ERR){
-printf("\ncan't catch SIGINT\n");int selection = 0;
-}
-
-char Signal_select[SIZE];
-
-while(1){
-
-    if (flag1 == 1 ){
-
-    printf("received SIGUSR1: Start Sending Tokens.\n");
-    Write_Log((char*)"Start Receiving and Sending Tokens.\n");
-
-    strcpy(Signal_select, "1");
-
-    //write 1 on  pipe1
-    close(pipe1[0]);
-
-    write(pipe1[1], &Signal_select, sizeof(Signal_select));
-
+    if (signal(SIGUSR1, Sig_Handler1) == SIG_ERR)
+    {
+        printf("\ncan't catch SIGUSR1\n");
     }
 
-    if (flag2 == 1 ){
-
-    printf("received SIGUSR2: Stop Sending Tokens.\n");
-    Write_Log((char*)"Stop Receiving Tokens.\n");
-
-    strcpy(Signal_select, "0");
-
-    //write on 0  pipe1
-    close(pipe1[0]);
-
-    write(pipe1[1], &Signal_select, sizeof(Signal_select));
-
-
+    if (signal(SIGUSR2, Sig_Handler2) == SIG_ERR)
+    {
+        printf("\ncan't catch SIGUSR2\n");
     }
 
-    if (flag_log == 1 ){
-
-    //Print the LOG
-
-    printf("received SIGINT: Printing Log.\n");
-    Write_Log((char*)"Print Log.\n");
-    Print_Log(); // Prints out the Log File
-
+    if (signal(SIGINT, Sig_Handler3) == SIG_ERR)
+    {
+        printf("\ncan't catch SIGINT\n");
+        int selection = 0;
     }
 
-    flag1 = 0;
-    flag2 = 0;
-    flag_log = 0;
+    char Signal_select[SIZE];
 
-    memset(Signal_select, 0, SIZE);
-    sleep(2);
+    while(1)
+    {
+
+        if (flag1 == 1 )
+        {
+
+            printf("received SIGUSR1: Start Sending Tokens.\n");
+            Write_Log((char*)"Start Receiving and Sending Tokens.\n");
+
+            strcpy(Signal_select, "1");
+
+            //write 1 on  pipe1
+            close(pipe1[0]);
+
+            write(pipe1[1], &Signal_select, sizeof(Signal_select));
+
+        }
+
+        if (flag2 == 1 )
+        {
+
+            printf("received SIGUSR2: Stop Sending Tokens.\n");
+            Write_Log((char*)"Stop Receiving Tokens.\n");
+
+            strcpy(Signal_select, "0");
+
+            //write on 0  pipe1
+            close(pipe1[0]);
+
+            write(pipe1[1], &Signal_select, sizeof(Signal_select));
+
+
+        }
+
+        if (flag_log == 1 )
+        {
+
+            //Print the LOG
+
+            printf("received SIGINT: Printing Log.\n");
+            Write_Log((char*)"Print Log.\n");
+            Print_Log(); // Prints out the Log File
+
+        }
+
+        flag1 = 0;
+        flag2 = 0;
+        flag_log = 0;
+
+        memset(Signal_select, 0, SIZE);
+        sleep(2);
 
     }
 }
@@ -137,7 +149,8 @@ void Write_Log(char string[50])
 }
 
 //prints the content of the Log
-void Print_Log(){
+void Print_Log()
+{
 
     FILE * f;
     char c;

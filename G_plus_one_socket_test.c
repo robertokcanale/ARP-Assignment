@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     printf("G+1: Portno =\n");
     //initializing my tokens
     char token_received[SIZE], token_to_send[SIZE];
-    char* pend;
+
 
 
 
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     int sockfd, portno, newsockfd, clilen, n;
     struct sockaddr_in serv_addr, cli_addr; // Internet addresses are here!
     struct hostent *server;
-    portno = 3030;
+    portno = 3052;
     printf("G+1: Portno = %d\n", portno);
 
     //my port number is argv[10]
@@ -80,11 +80,6 @@ int main(int argc, char *argv[])
     if (n < 0)
     error((char*)"ERROR reading from socket\n");
     printf("%s\n", token_received);
-
-    //token_received_float = strtof(token_received, &pend);
-    //printf("Float received on Socket: %f", token_received_float);
-
-    //write on PIPE (which pipe? user who receives this should properly configure argv numbers
 
     }
     return 0;

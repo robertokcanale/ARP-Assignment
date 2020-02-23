@@ -27,10 +27,10 @@
 // REVIEW G
 // CHECK THE MSG SENT FROM P->L
 // TEST IT MF
-    // (P -> L) here we do it the stupid way, as P is going to write on 3 pipes communicationg with L
-    //its going to send the RECEIVED VALUE, THE SENT VALUE and wether it received it from G-1 or S
+// (P -> L) here we do it the stupid way, as P is going to write on 3 pipes communicationg with L
+//its going to send the RECEIVED VALUE, THE SENT VALUE and wether it received it from G-1 or S
 
-    //Hardcode your portnumber in G+1
+//Hardcode your portnumber in G+1
 
 
 int main()
@@ -77,7 +77,7 @@ int main()
     }
     if (pipe(fd4) < 0)
     {
-        perror("Error! Pipe #3.1 failed.\n");
+        perror("Error! Pipe #3. failed.\n");
         return -1;
     }
 
@@ -85,8 +85,8 @@ int main()
 
     //arrays containing data to pass to the exec
     char *argP[13];
-    char *argG[4];
-    char *argS[4];
+    char *argG[5];
+    char *argS[5];
     char *argL[6];
 
     char r_arg1[5]; //read pipe1
@@ -215,7 +215,7 @@ int main()
                     execvp(nameG, argG); //Executing G
                 }
             }
-          }
+        }
 
 
         //Waits for all the process to terminate and verifis it
