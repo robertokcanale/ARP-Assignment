@@ -44,8 +44,10 @@ int main(int argc, char *argv[])
     char signal_received[SIZE];
     char token_received[SIZE];
     char token_to_send[SIZE];
+    char L_buffer_received[SIZE];
+    char L_buffer_sent[SIZE];
 
-    R_Frequency = atof(argv[11]); //giving a value to my RF
+    R_Frequency = atof(argv[9]); //giving a value to my RF
     signal_received_int= 1;
     token_received_float = 0.0f;
     token_to_send_float = 0.0f;
@@ -56,7 +58,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in serv_addr;
 
     //my port number is argv[10]
-    portno = atoi(argv[10]);
+    portno = atoi(argv[8]);
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
     if (sockfd < 0)
@@ -69,7 +71,7 @@ int main(int argc, char *argv[])
     bzero((char *) &serv_addr, sizeof(serv_addr));
 
     //idetifying the server (on the same machine)
-    if(inet_pton(AF_INET, argv[9], &serv_addr.sin_addr)<=0)
+    if(inet_pton(AF_INET, argv[7], &serv_addr.sin_addr)<=0)
     {
         error((char*)"Invalid addrs:Address not supported\n");
     }
@@ -134,10 +136,6 @@ int main(int argc, char *argv[])
             //convert from char buffer to Int
             sscanf(signal_received, "%d", &signal_received_int);
 
-           /* if (res > 0)
-            {
-                printf("Read %d bytes from Pipe1: %d\n", res, signal_received_int);
-            }*/
         } else if (FD_ISSET(fd2, &file_descriptor_select) && (signal_received_int == 1))
         {
             // We can read from fd2
@@ -149,19 +147,17 @@ int main(int argc, char *argv[])
             clock_gettime (CLOCK_REALTIME, &time_received);
             ns_received = (float)time_received.tv_sec + (float)time_received.tv_nsec;
 
-
-            /* if (res > 0)
-            {
-                //printf("Read %d bytes from Pipe2: %f\n", res, token_received_float);
-            }*/
         }
 
         //now perform operations according to the received signal
         if(signal_received_int == 1)  //Start Receiving Tokens and sending them!
         {
+            //Send Token Received to L
+            strcpy(L_buffer_received, "L: Token Received:");
+            strcat(L_buffer_received, token_received);
 
-            //write on the log
-            Write_Log((char*)"P: Received token, seding it.\n");
+            write(atoi(argv[6]), &L_buffer_received, sizeof(L_buffer_received));
+
 
             //interface here to SEND TOKENS OVER THE SOCKET
 
@@ -169,7 +165,7 @@ int main(int argc, char *argv[])
 
             clock_gettime (CLOCK_REALTIME, &time_sent);
             ns_sent = (float)time_sent.tv_sec + (float)time_sent.tv_nsec;
-            DT = (ns_sent - ns_received)/1000000; //getting the divided by 1000000 to have non-exploding results
+            DT = (ns_sent - ns_received)/1000000000; //getting the divided by 1000000 to have non-exploding results
             printf("\nP: Time Received: %f.\nTime Sent: %f\nDT: %f\n", ns_received, ns_sent, DT);
 
 
@@ -186,14 +182,14 @@ int main(int argc, char *argv[])
                 error((char*)"\nERROR writing to socket.\n");
             }
 
-            //sending data to the L pipe outside
-            //write on  pipe3.1
+            strcpy(L_buffer_sent, "L: Token Sent:");
+            strcat(L_buffer_sent, token_to_send);
 
-            res3 = write(atoi(argv[6]), &token_received, sizeof(token_received));
+            write(atoi(argv[6]), &L_buffer_sent, sizeof(L_buffer_sent));
+            memset(L_buffer_received, 0, SIZE);
+            memset(L_buffer_sent, 0, SIZE);
 
-            //write on  pipe3.2
 
-            res4 = write(atoi(argv[8]), &token_to_send, sizeof(token_to_send));
 
         }
         else if(signal_received_int == 0)    //Stop receiving tokens and sending them
@@ -207,8 +203,8 @@ int main(int argc, char *argv[])
             printf("\nSomething went really wrong.\n");
         }
 
-        memset(token_received, 0, SIZE);
-        memset(token_to_send, 0, SIZE);
+
+        //memset(token_to_send, 0, SIZE);
 
         sleep(2);
     }// end of while
@@ -246,7 +242,7 @@ void Write_Log(char string[50])
         printf("Cannot open file\n");
         exit(0);
     }
-    fprintf(f, "\nP: <%s> %s\n", asctime(tm), string );
+    fprintf(f, "\n <%s>\nP: %s\n", asctime(tm), string);
     fclose(f);
 }
 

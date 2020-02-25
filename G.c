@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     //initializing my tokens
     char token_buffer[SIZE];
     float token_to_send;
-    token_to_send = 0.52165;
+    token_to_send = 0.521652561;
 
     printf("G process: starting execution.\n");
 

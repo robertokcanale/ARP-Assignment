@@ -16,20 +16,6 @@
 #include <netinet/in.h>
 
 
-//here is my Launcher function. We tailor it to our needs:
-//-SELECT between G and S from P
-//-PIPE from P to L
-//-SOCKET from P to G+1
-//-SIGNALS to S
-
-// TO DO
-// SOCKETS
-// REVIEW G
-// CHECK THE MSG SENT FROM P->L
-// TEST IT MF
-// (P -> L) here we do it the stupid way, as P is going to write on 3 pipes communicationg with L
-//its going to send the RECEIVED VALUE, THE SENT VALUE and wether it received it from G-1 or S
-
 //Hardcode your portnumber in G+1
 
 
@@ -85,9 +71,9 @@ int main()
 
     //arrays containing data to pass to the exec
     char *argP[13];
-    char *argG[5];
-    char *argS[5];
-    char *argL[6];
+    char *argG[4];
+    char *argS[4];
+    char *argL[4];
 
     char r_arg1[5]; //read pipe1
     char w_arg1[5]; //write pipe1
@@ -117,19 +103,15 @@ int main()
     argP[4] = w_arg2; //write, pipe2
     argP[5] = r_arg3; //read, pipe3.1
     argP[6] = w_arg3; //write, pipe3.1
-    argP[7] = r_arg4; //read, pipe3.2
-    argP[8] = w_arg4; //write, pipe3.2
-    argP[9] = next_machine; //next IP
-    argP[10] = my_portnumber; //my receivng port
-    argP[11] = RF; //the read RF
-    argP[12] = NULL;
+    argP[7] = next_machine; //next IP
+    argP[8] = my_portnumber; //my receivng port
+    argP[9] = RF; //the read RF
+    argP[10] = NULL;
 
     //Arg for L
     argL[1] = r_arg3; //read, pipe3.1
     argL[2] = w_arg3; //write, pipe3.1
-    argL[3] = r_arg4; //read, pipe3.2
-    argL[4] = w_arg4; //read, pipe3.2
-    argL[5] = NULL;
+    argL[3] = NULL;
 
     //Arg for S
     argS[1] = r_arg1; //read, pipe1

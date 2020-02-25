@@ -1,308 +1,65 @@
 
-S: <Wed Feb 19 18:22:32 2020
-> S process: waiting for the user to Select input
+ <Tue Feb 25 12:06:56 2020
+>
+ L: Token Received:1.7216526270
 
+ <Tue Feb 25 12:06:56 2020
+>
+ L: Token Sent:1.7216526270
 
-P: <Wed Feb 19 18:22:32 2020
-> P: Received token, seding it.
+ <Tue Feb 25 12:06:58 2020
+>
+P: P: Received token, seding it.
 
 
-P: <Wed Feb 19 18:22:34 2020
-> P: Received token, seding it.
+ <Tue Feb 25 12:06:58 2020
+>
+ L: Token Received:2.9216525555
 
+ <Tue Feb 25 12:06:58 2020
+>
+ L: Token Sent:2.9216525555
 
-P: <Wed Feb 19 18:22:36 2020
-> P: Received token, seding it.
+ <Tue Feb 25 12:07:00 2020
+>
+P: P: Received token, seding it.
 
 
-P: <Wed Feb 19 18:22:38 2020
-> P: Received token, seding it.
+ <Tue Feb 25 12:07:00 2020
+>
+ L: Token Received:4.1216526031
 
+ <Tue Feb 25 12:07:00 2020
+>
+ L: Token Sent:4.1216526031
 
-P: <Wed Feb 19 18:22:40 2020
-> P: Received token, seding it.
+ <Tue Feb 25 12:07:02 2020
+>
+P: P: Received token, seding it.
 
 
-P: <Wed Feb 19 18:22:42 2020
-> P: Received token, seding it.
+ <Tue Feb 25 12:07:02 2020
+>
+ L: Token Received:5.3216524124
 
+ <Tue Feb 25 12:07:02 2020
+>
+ L: Token Sent:5.3216524124
 
-P: <Wed Feb 19 18:22:44 2020
-> P: Received token, seding it.
+ <Tue Feb 25 12:07:04 2020
+>
+ L: Token Received:6.5216522217
 
+ <Tue Feb 25 12:07:04 2020
+>
+P: P: Received token, seding it.
 
-P: <Wed Feb 19 18:22:46 2020
-> P: Received token, seding it.
 
+ <Tue Feb 25 12:07:04 2020
+>
+ L: Token Sent:6.5216522217
 
-S: <Wed Feb 19 18:22:46 2020
-> Start Receiving and Sending Tokens.
-
-
-S: <Wed Feb 19 18:22:46 2020
-> Start Receiving and Sending Tokens.
-
-
-S: <Wed Feb 19 18:22:46 2020
-> Start Receiving and Sending Tokens.
-
-
-P: <Wed Feb 19 18:22:48 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 18:22:50 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 18:22:52 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 18:22:54 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 18:22:56 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 18:22:58 2020
-> P: Received token, seding it.
-
-
-P: <Wed Feb 19 18:23:00 2020
-> P: Received token, seding it.
-
-
-S: <Wed Feb 19 18:23:00 2020
-> Stop Receiving Tokens.
-
-
-P: <Wed Feb 19 18:23:02 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:04 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:06 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:08 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:10 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:12 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:14 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:16 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:18 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:20 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:22 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:24 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:26 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:28 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:30 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:32 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:34 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:36 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:38 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:40 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:42 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:44 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:46 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:48 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:50 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:52 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:54 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:56 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:23:58 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:00 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:02 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:04 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:06 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:08 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:10 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:12 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:14 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:16 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:18 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:20 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:22 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:24 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:26 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:28 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:30 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:32 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:34 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:36 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:38 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:40 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:42 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:44 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:46 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:48 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:50 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:52 2020
-> P: Stop receiving and sending tokens.
-
-
-P: <Wed Feb 19 18:24:54 2020
-> P: Stop receiving and sending tokens.
+<Tue Feb 25 12:07:05 2020
+>
+S: Print Log.
 

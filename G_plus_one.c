@@ -22,6 +22,7 @@ printf("%s\n",msg);
 exit(0);
 }
 
+//Writes a char buffer
 
 int main(int argc, char *argv[]){
     printf("G_test process: starting execution.\n");
@@ -31,11 +32,9 @@ int main(int argc, char *argv[]){
     int sockfd, portno, newsockfd, clilen, n;
     struct sockaddr_in serv_addr, cli_addr; // Internet addresses are here!
     struct hostent *server;
-    portno = 3050; //modify accordingly if needed
+    //also could be protno = atoi(argv[]) something if needed
+    portno = 3052; //modify accordingly to my IP port if needed
     printf("G+1: Portno = %d\n", portno);
-
-    //my port number is argv[10]
-
 
     //new socket created here
     sockfd = socket(AF_INET, SOCK_STREAM, 0);

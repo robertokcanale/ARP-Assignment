@@ -22,7 +22,6 @@ void Write_Log(char string[50]);
 
 void Sig_Handler1(int signo)
 {
-
     flag1 = 1;
 
 }
@@ -144,7 +143,7 @@ void Write_Log(char string[50])
         printf("Cannot open file\n");
         exit(0);
     }
-    fprintf(f, "\nS: <%s> %s\n", asctime(tm), string );
+    fprintf(f, "\n<%s>\nS: %s\n", asctime(tm), string );
     fclose(f);
 }
 
