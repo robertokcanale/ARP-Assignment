@@ -166,14 +166,14 @@ int main(int argc, char *argv[])
             clock_gettime (CLOCK_REALTIME, &time_sent);
             ns_sent = (float)time_sent.tv_sec + (float)time_sent.tv_nsec;
             DT = (ns_sent - ns_received)/1000000000; //getting the divided by 1000000 to have non-exploding results
-            printf("\nP: Time Received: %f.\nTime Sent: %f\nDT: %f\n", ns_received, ns_sent, DT);
+            printf("\nTime Received: %f.\nTime Sent: %f\nDT: %f\n", ns_received, ns_sent, DT);
 
 
             token_to_send_float = New_Token(token_received_float, DT, R_Frequency);
 
-            sprintf(token_to_send, "%.10f", token_received_float);
+            sprintf(token_to_send, "%.10f", token_to_send_float);
 
-            printf("\nP: Receiving and sending tokens.\nToken Received: %f.\nToken Sent: %s\n", token_received_float, token_to_send);
+            printf("\nReceiving and sending tokens.\nToken Received: %f.\nToken Sent: %s\n", token_received_float, token_to_send);
 
             //writing on socket
             n = write(sockfd, &token_to_send, SIZE);//write on socket
@@ -195,7 +195,7 @@ int main(int argc, char *argv[])
         else if(signal_received_int == 0)    //Stop receiving tokens and sending them
         {
 
-            Write_Log((char*)"P: Stop receiving and sending tokens.\n");
+            Write_Log((char*)"Stop receiving and sending tokens.\n");
 
         }
         else
@@ -242,7 +242,7 @@ void Write_Log(char string[50])
         printf("Cannot open file\n");
         exit(0);
     }
-    fprintf(f, "\n <%s>\nP: %s\n", asctime(tm), string);
+    fprintf(f, "\n-%s\nP: %s\n", asctime(tm), string);
     fclose(f);
 }
 

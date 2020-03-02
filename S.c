@@ -72,6 +72,8 @@ int main(int argc, char *argv[])
         int selection = 0;
     }
 
+    Write_Log((char*)"Start Receiving and Sending Tokens.\n");
+
     char Signal_select[SIZE];
 
     while(1)
@@ -143,7 +145,7 @@ void Write_Log(char string[50])
         printf("Cannot open file\n");
         exit(0);
     }
-    fprintf(f, "\n<%s>\nS: %s\n", asctime(tm), string );
+    fprintf(f, "\n-%s\nS: %s\n", asctime(tm), string );
     fclose(f);
 }
 

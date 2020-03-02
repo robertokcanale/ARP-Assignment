@@ -88,7 +88,7 @@ void Write_Log(char string[50])
         printf("Cannot open file\n");
         exit(0);
     }
-    fprintf(f, "\n <%s>\n %s\n", asctime(tm), string );
+    fprintf(f, "\n -%s\n %s\n", asctime(tm), string );
     fclose(f);
 }
 
