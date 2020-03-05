@@ -68,4 +68,3 @@ void Write_Log_Sent(float sent_token)
     fprintf(f, "\n<%s> <G: Token Sent:> <%f>", asctime(tm), sent_token );
     fclose(f);
 }
-

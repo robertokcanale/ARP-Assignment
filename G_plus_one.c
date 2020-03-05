@@ -1,18 +1,11 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <math.h>
-#include <sys/wait.h>
+#include <strings.h>
 #include <unistd.h>
-#include <signal.h>
-#include <string.h>
-#include <netdb.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <time.h>
+#include <stdio.h>
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <sys/select.h>
+#include <time.h>
 
 #define SIZE 256
 
@@ -22,19 +15,37 @@ printf("%s\n",msg);
 exit(0);
 }
 
-//Writes a char buffer
 
-int main(int argc, char *argv[]){
+
+//little guide for this, most of it is already written.
+// CORRECT the ARGV[i] indexes for :
+//-the PORT NUMBER when executing this file!
+//-the IP argument!
+//-the close and write pipes when sending arguments
+
+int main(int argc, char *argv[])
+{
     printf("G_test process: starting execution.\n");
+    printf("G+1: Portno =\n");
+    //initializing my tokens
+    char token_received[SIZE], token_to_send[SIZE];
+
+
+
+
+    //printf("G+1: Portno = %f", token_received_float);
+
 
 //creating SERVER socket
     //variables initialization.socket
     int sockfd, portno, newsockfd, clilen, n;
     struct sockaddr_in serv_addr, cli_addr; // Internet addresses are here!
     struct hostent *server;
-    //also could be protno = atoi(argv[]) something if needed
-    portno = 3052; //modify accordingly to my IP port if needed
+    portno = 9999;
     printf("G+1: Portno = %d\n", portno);
+
+    //my port number is argv[10]
+
 
     //new socket created here
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -62,20 +73,20 @@ int main(int argc, char *argv[]){
          error((char*)"ERROR on accepting the client\n");
     }
 
-    //initializing my tokens
-    char token_buffer[SIZE];
-
     while(1) {
 
     //read from Socket
-    n = read(newsockfd, &token_buffer, sizeof(token_buffer));
+    n = read(newsockfd, &token_received, sizeof(token_received));
     if (n < 0)
     error((char*)"ERROR reading from socket\n");
+    printf("%s\n", token_received);
 
-    write(atoi(argv[2]), &token_buffer, sizeof(token_buffer));
+    close(atoi(argv[1]));
+    write(atoi(argv[2]), &token_received, sizeof(token_received));
 
     sleep(2);
 
     }
+    return 0;
 
 }

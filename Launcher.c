@@ -32,6 +32,9 @@ int main()
     fscanf(config_file, "%s", my_portnumber);
     fscanf(config_file, "%s", RF);
 
+    printf("Launcher: Next IP %s, my port number %s\n", next_machine, my_portnumber);
+
+
     //Initializing the processes, their return status and the required Pipes
     pid_t processP;
     pid_t processL;

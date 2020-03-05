@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 
     R_Frequency = atof(argv[9]); //giving a value to my RF
     signal_received_int= 1;
-    token_received_float = 0.0f;
+    token_received_float = 1.0f;
     token_to_send_float = 0.0f;
 
 
@@ -60,6 +60,8 @@ int main(int argc, char *argv[])
     //my port number is argv[10]
     portno = atoi(argv[8]);
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+    printf("P: Next IP %s, my port number %d\n", argv[7], portno);
 
     if (sockfd < 0)
     {
@@ -75,7 +77,6 @@ int main(int argc, char *argv[])
     {
         error((char*)"Invalid addrs:Address not supported\n");
     }
-
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(portno);
 
@@ -85,14 +86,17 @@ int main(int argc, char *argv[])
     {
         error((char*)"ERROR connecting\n");
     }
+
+    printf("Reacheed while1\n");
     //now that the connection is estabilshed, we can keep receivig datafrom the server through the socket!
+    sprintf(token_to_send, "%.10f", token_to_send_float);
+    n = write(sockfd, &token_to_send, SIZE);
 
-
-
+    printf("Reacheed while2\n");
 
     while(1)
     {
-
+printf("LOOPING \n");
         //Stuff needed for the select
         FD_ZERO(&file_descriptor_select); //initialize file_descriptor_select to 0
         FD_SET(fd1, &file_descriptor_select); //Sets the bit for the file descriptor fd1 in the file descriptor set file_descriptor_select
@@ -245,7 +249,3 @@ void Write_Log(char string[50])
     fprintf(f, "\n-%s\nP: %s\n", asctime(tm), string);
     fclose(f);
 }
-
-
-
-

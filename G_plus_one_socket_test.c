@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     int sockfd, portno, newsockfd, clilen, n;
     struct sockaddr_in serv_addr, cli_addr; // Internet addresses are here!
     struct hostent *server;
-    portno = 3052;
+    portno = 2476;
     printf("G+1: Portno = %d\n", portno);
 
     //my port number is argv[10]

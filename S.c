@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
         flag_log = 0;
 
         memset(Signal_select, 0, SIZE);
-        sleep(2);
+        
 
     }
 }
