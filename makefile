@@ -14,5 +14,5 @@ clean:
 	rm -f P
 	rm -f S
 	rm -f L
-	rm -f G_justin
+	rm -f G
 	rm -f G_plus_one_socket_tests

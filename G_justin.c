@@ -7,9 +7,8 @@
 #include <netinet/in.h>
 #include <string.h>
 
-#define PORT 3030
-
-#define BUFFSIZE 8192
+#define PORT 7878
+#define SIZE 256
 
 //server
 void error(const char *msg) {
@@ -18,11 +17,14 @@ void error(const char *msg) {
 }
 
 int main(int argc, char*argv[]){
+
+    close(atoi(argv[1]));
+
     //acts as the server and will receive tokens
     //from the previous machine via socket and
     //dispatch them to P via pipe
     int g_sockfd, g_newsockfd, g_clilen, g_n;
-    char g_buffer[BUFFSIZE];
+    char g_buffer[SIZE];
     struct sockaddr_in g_serv_addr, g_cli_addr;
 
     //create new socket
@@ -53,30 +55,33 @@ int main(int argc, char*argv[]){
     }
 
 
-    bzero(g_buffer,256);
+    bzero(g_buffer,SIZE);
     //reading token from client through socket
 
 
     //initialize and send token
-    strncpy(g_buffer,"0", BUFFSIZE);
+    strncpy(g_buffer,"0", SIZE);
     g_n = write(atoi(argv[2]), &g_buffer, sizeof(g_buffer));
     if (g_n < 0){
         error("ERROR writing to pipe");
     }
     while (1){
         //read token from socket
-        g_n = read(g_newsockfd, g_buffer, 255);
+        g_n = read(g_newsockfd, &g_buffer, sizeof(g_buffer));
         if (g_n < 0){
             error("ERROR reading from socket");
         }
-        close(atoi(argv[1]));
+        printf("G: is sending %s\n", g_buffer );
+
         //send token to P via pipe
         g_n = write(atoi(argv[2]), &g_buffer, sizeof(g_buffer));
         if (g_n < 0){
             error("ERROR writing to pipe");
         }
 
-        sleep(2);
+
+        memset(g_buffer, 0, SIZE);
+        sleep(1);
     }
 
     return 0;

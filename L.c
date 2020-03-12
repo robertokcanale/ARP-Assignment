@@ -46,22 +46,11 @@ int main(int argc, char *argv[])
 
     while(1)
     {
-
-
         read(atoi(argv[1]), &token_received, sizeof(token_received));  //reading from pipe 3.1
-
-
-        //printf("%s\n", token_received);
 
         //calling my functions and writing on my token
         Write_Log(token_received);
-
-
         memset(token_received, 0, SIZE);
-
-
-        //sleep(2);
-
 
     }
 
@@ -128,9 +117,3 @@ void Write_Log_Sent(float sent_token)
     fprintf(f, "\n<%s> <L: Token Sent:> <%f>", asctime(tm), sent_token );
     fclose(f);
 }
-
-
-
-
-
-

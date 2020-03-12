@@ -38,7 +38,9 @@ int main(int argc, char *argv[])
     struct timespec time_received; //define timespec used to compute the time
     struct timespec time_sent;
     float ns_received, ns_sent;
-
+    bool unconnected, cont_while;
+    //unconnected = true;
+    //cont_while = true;
 
     //buffers for my select pipes
     char signal_received[SIZE];
@@ -82,21 +84,27 @@ int main(int argc, char *argv[])
 
 
     //Trying to connect to the server!
-    if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
-    {
-        error((char*)"ERROR connecting\n");
-    }
 
-    printf("Reacheed while1\n");
+
+    do {
+            if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0){
+            } else {
+                unconnected = false;
+                printf("I have connected!\n");
+            }
+            if (!unconnected){
+                cont_while = false;
+            }
+        } while (cont_while);
+
     //now that the connection is estabilshed, we can keep receivig datafrom the server through the socket!
     sprintf(token_to_send, "%.10f", token_to_send_float);
     n = write(sockfd, &token_to_send, SIZE);
 
-    printf("Reacheed while2\n");
+
 
     while(1)
     {
-printf("LOOPING \n");
         //Stuff needed for the select
         FD_ZERO(&file_descriptor_select); //initialize file_descriptor_select to 0
         FD_SET(fd1, &file_descriptor_select); //Sets the bit for the file descriptor fd1 in the file descriptor set file_descriptor_select
@@ -113,7 +121,7 @@ printf("LOOPING \n");
             error((char*)"Error with select()\n");
         }
 
-        if(FD_ISSET(fd1, &file_descriptor_select) && (FD_ISSET(fd2, &file_descriptor_select) && (signal_received_int == 1))){
+      if(FD_ISSET(fd1, &file_descriptor_select) && (FD_ISSET(fd2, &file_descriptor_select) && (signal_received_int == 1))){
 
             // We can read from fd1
             res1 = read(fd1, &signal_received, sizeof(signal_received));
@@ -146,7 +154,8 @@ printf("LOOPING \n");
             res = read(fd2, &token_received, sizeof(token_received));
 
             //convert from char buffer to float
-            token_received_float = atof(token_received);
+            token_received_float = strtof(token_received,NULL);
+            printf("RECEIVED: %s, %f\n",token_received, token_received_float);
 
             clock_gettime (CLOCK_REALTIME, &time_received);
             ns_received = (float)time_received.tv_sec + (float)time_received.tv_nsec;
@@ -169,8 +178,8 @@ printf("LOOPING \n");
 
             clock_gettime (CLOCK_REALTIME, &time_sent);
             ns_sent = (float)time_sent.tv_sec + (float)time_sent.tv_nsec;
-            DT = (ns_sent - ns_received)/1000000000; //getting the divided by 1000000 to have non-exploding results
-            printf("\nTime Received: %f.\nTime Sent: %f\nDT: %f\n", ns_received, ns_sent, DT);
+            DT = (ns_sent - ns_received)/1000000; //getting the divided by 1000000 to have non-exploding results
+            //printf("\nTime Received: %f.\nTime Sent: %f\nDT: %f\n", ns_received, ns_sent, DT);
 
 
             token_to_send_float = New_Token(token_received_float, DT, R_Frequency);
@@ -186,19 +195,19 @@ printf("LOOPING \n");
                 error((char*)"\nERROR writing to socket.\n");
             }
 
+
             strcpy(L_buffer_sent, "L: Token Sent:");
             strcat(L_buffer_sent, token_to_send);
 
             write(atoi(argv[6]), &L_buffer_sent, sizeof(L_buffer_sent));
             memset(L_buffer_received, 0, SIZE);
             memset(L_buffer_sent, 0, SIZE);
-
-
+            memset(token_received, 0, SIZE);
 
         }
         else if(signal_received_int == 0)    //Stop receiving tokens and sending them
         {
-
+            memset(token_received, 0, SIZE);
             Write_Log((char*)"Stop receiving and sending tokens.\n");
 
         }
@@ -210,7 +219,7 @@ printf("LOOPING \n");
 
         //memset(token_to_send, 0, SIZE);
 
-        sleep(2);
+        sleep(1);
     }// end of while
     return 0;
 

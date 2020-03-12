@@ -30,18 +30,12 @@ int main(int argc, char *argv[])
     //initializing my tokens
     char token_received[SIZE], token_to_send[SIZE];
 
-
-
-
-    //printf("G+1: Portno = %f", token_received_float);
-
-
 //creating SERVER socket
     //variables initialization.socket
     int sockfd, portno, newsockfd, clilen, n;
     struct sockaddr_in serv_addr, cli_addr; // Internet addresses are here!
     struct hostent *server;
-    portno = 9999;
+    portno = 7878;
     printf("G+1: Portno = %d\n", portno);
 
     //my port number is argv[10]
@@ -72,7 +66,7 @@ int main(int argc, char *argv[])
     if (newsockfd < 0){
          error((char*)"ERROR on accepting the client\n");
     }
-
+close(atoi(argv[1]));
     while(1) {
 
     //read from Socket
@@ -81,7 +75,7 @@ int main(int argc, char *argv[])
     error((char*)"ERROR reading from socket\n");
     printf("%s\n", token_received);
 
-    close(atoi(argv[1]));
+
     write(atoi(argv[2]), &token_received, sizeof(token_received));
 
     sleep(2);
